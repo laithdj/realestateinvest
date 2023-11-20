@@ -1,0 +1,24 @@
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    margin-right: 10px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+    color: #07c196;
+    &:hover {
+      color: #07c196;
+      text-decoration: none;
+    }
+  }
+}
+.property-table {
+  tbody tr td {
+    text-align: center;
+  }
+  thead tr th {
+    text-align: center !important;
+  }
+}
