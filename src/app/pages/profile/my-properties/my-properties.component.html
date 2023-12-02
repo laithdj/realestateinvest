@@ -17,6 +17,8 @@
 <!--=====================================-->
 <main class="site-main content-area">
   <div class="container">
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
     <div class="row">
       <div class="col-lg-12 col-sm-12 col-12">
         <div class="page-content-block">
@@ -27,16 +29,20 @@
                 <thead>
                   <tr>
                     <th>Title</th>
-                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>City</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr *ngFor="let pData of [1,2,3,4]">
-                    <td>Property {{pData}}</td>
-                    <td>Lorem ipsubmm.....</td>
+                <tbody *ngIf="propertyList?.length > 0; else showNoRecordData">
+                  <tr *ngFor="let pData of propertyList">
+                    <td>{{pData.title}}</td>
+                    <td>{{pData.propertyType?.type}}</td>
+                    <td>{{pData.propertyStatus?.status}}</td>
+                    <td>{{pData.city?.name}}</td>
                     <td class="action">
-                      <a routerLink="/profile/edit-property/{{pData}}">
+                      <a routerLink="/profile/edit-property/{{pData.id}}">
                         <i class="fas fa-eye"></i>
                       </a>
                       <a href="javascript:;" (click)="deleteProperty(pData)">
@@ -45,6 +51,13 @@
                     </td>
                   </tr>
                 </tbody>
+                <ng-template #showNoRecordData>
+                  <tbody>
+                    <tr>
+                      <td colspan="6" class="text-danger">No Properties registered yet.</td>
+                    </tr>
+                  </tbody>
+                </ng-template>
               </table>
             </div>
           </div>

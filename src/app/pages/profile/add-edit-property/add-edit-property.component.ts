@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PropertyForm } from 'src/app/core/interfaces/property-form';
+import { MenuItem, MessageService } from 'primeng/api';
+import { PropertyService } from '../services/property/property.service';
 
 @Component({
   selector: 'app-add-edit-property',
@@ -17,11 +19,35 @@ export class AddEditPropertyComponent implements OnInit {
     { id: 4, name: 'Project 4', },
     { id: 5, name: 'Project 5', },
   ]
+  items: MenuItem[];
 
 
-  constructor() { }
+  constructor(
+    private propertyService: PropertyService
+  ) { }
 
   ngOnInit(): void {
+    this.items = [
+      {
+        label: 'General',
+        routerLink: 'general',
+      },
+      {
+        label: 'Details',
+        routerLink: 'details',
+      },
+      {
+        label: 'Images',
+        routerLink: 'images',
+      },
+      {
+        label: 'Seller Details',
+        routerLink: 'seller-details',
+      },
+    ];
+  }
+  onActiveIndexChange(event: number) {
+    console.log('onActiveIndexChange called.', event);
   }
 
 }

@@ -25,7 +25,7 @@
               <li>
                 <a routerLink="contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
               </li>
-              <li>
+              <li *ngIf="loginUserData">
                 <a routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">My Profile</a>
                 <ul class="dropdown-menu-col-1">
                   <li>
@@ -166,9 +166,14 @@
                   <div class="item-count">0</div>
                 </a>
               </li> -->
-              <li class="action-item-style my-account">
+              <li class="action-item-style my-account" *ngIf="!loginUserData">
                 <a routerLink="/account" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sign In">
                   <i class="flaticon-user-1" [ngClass]="{'icon-round': !isHomePage}"></i>
+                </a>
+              </li>
+              <li class="action-item-style my-account" *ngIf="loginUserData">
+                <a (click)="onLogout()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
+                  <i class="fa-solid fa-arrow-right-from-bracket" [ngClass]="{'icon-round': !isHomePage}"></i>
                 </a>
               </li>
               <li class="listing-button">
@@ -224,7 +229,7 @@
           <li class="list menu-item-parent">
             <a routerLink="contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
           </li>
-          <li class="list menu-item-parent menu-item-has-children">
+          <li class="list menu-item-parent menu-item-has-children" *ngIf="loginUserData">
             <a class="animation" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">My Profile</a>
             <ul class="main-menu__dropdown sub-menu">
               <li>

@@ -15789,6 +15789,26 @@ body.slidemenuon .sidebarBtn .bar:nth-child(4) {
   outline: 0;
   box-shadow: none;
 }
+.form-horizontal .form-group .btn-primary.outline {
+  color: var(--rt-primary-color);
+  border-color: var(--rt-primary-color);
+  background-color: inherit;
+  padding: 15px 20px;
+  height: auto;
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+}
+.form-horizontal .form-group .btn-primary:hover.outline {
+  background-color: var(--rt-primary-dark);
+  color: #fff;
+}
+.form-horizontal .form-group .btn-primary:focus.outline {
+  outline: 0;
+  box-shadow: none;
+}
 .form-horizontal .form-group .rtcl-forgot-password a {
   color: #07c196;
 }
@@ -15893,6 +15913,11 @@ body.slidemenuon .sidebarBtn .bar:nth-child(4) {
 }
 .form-horizontal .form-group .form-check input[type="radio"] {
   height: auto;
+  padding: 9px 10px;
+}
+.form-horizontal .form-group .form-check .form-check-input:checked {
+  background-color: var(--rt-primary-color);
+  border-color: var(--rt-primary-color);
 }
 .form-horizontal .form-group .form-check input[type="radio"] + label {
   padding-left: 10px;
