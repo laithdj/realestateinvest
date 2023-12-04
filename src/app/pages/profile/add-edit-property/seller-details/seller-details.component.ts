@@ -24,9 +24,18 @@ export class SellerDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const existingSellerDetails = this.propertyService.getFormValue().sellerDetails;
-    this.propertyForm = this.initialFormValues(existingSellerDetails);
+    this.setupFormData();
     this.errors = {};
+  }
+  setupFormData() {
+    const existingSellerDetails = this.propertyService.getFormValue().sellerDetails;
+    // if (this.propertyService.updateData?.id) {
+    //   existingSellerDetails = this.propertyService.updateData;
+    //   this.propertyForm = this.initialFormValues(existingSellerDetails);
+    //   this.propertyService.setFormValue('SELLER_DETAILS', this.propertyForm);
+    //   return;
+    // }
+    this.propertyForm = this.initialFormValues(existingSellerDetails);
   }
   initialFormValues(sellerValues: any) {
     return {
@@ -60,7 +69,11 @@ export class SellerDetailsComponent implements OnInit {
       this.propertyService.setFormValue('SELLER_DETAILS', this.propertyForm);
       const propertyFormNewValue = this.propertyService.getFormValue();
       console.log('propertyFormNewValue.sellerDetails', propertyFormNewValue.sellerDetails);
-      this.addProperty()
+      if (this.propertyService.updateId && this.propertyService.updateData?.id) {
+        this.editProperty(this.propertyService.updateData.id);
+        return;
+      }
+      this.addProperty();
       // setTimeout(() => {
       //   this.submitLoading = false;
       // }, 1000);
@@ -86,6 +99,26 @@ export class SellerDetailsComponent implements OnInit {
       }
     )
   }
+  editProperty(propertyId): void {
+    this.propertyService.updateProperty(propertyId).subscribe(
+      (createRes: any) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Property updated.' });
+        setTimeout(() => {
+          this.router.navigateByUrl(`/profile/my-properties`);
+          this.resetPropertyForm();
+          this.submitLoading = false;
+        }, 1000);
+      },
+      (createErr: any) => {
+        if (createErr.error?.message) {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: createErr.error?.message });
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.ERROR_MESSAGES.SOMETHING_WRONG });
+        }
+        this.submitLoading = false;
+      }
+    )
+  }
   resetPropertyForm() {
     this.submitted = false;
     this.errors = {};
@@ -94,6 +127,10 @@ export class SellerDetailsComponent implements OnInit {
   }
 
   onPreviousPage(): void {
+    if (this.propertyService.updateId) {
+      this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/images`);
+      return;
+    }
     this.router.navigateByUrl(`/profile/add-property/images`);
   }
 

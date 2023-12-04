@@ -3,6 +3,7 @@ import * as CONSTANTS from 'src/app/core/constants';
 import { PropertyService } from '../../services/property/property.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { backendurl, baseurl } from 'src/environments/environment';
 
 @Component({
   selector: 'app-detail',
@@ -31,10 +32,19 @@ export class DetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const propertyDetails = this.propertyService.getFormValue().details;
-    this.propertyForm = this.initialFormValues(propertyDetails);
+    this.setupFormData();
     this.errors = {};
     this.getAmenitiesList();
+  }
+  setupFormData() {
+    const propertyDetails = this.propertyService.getFormValue().details;
+    // if (this.propertyService.updateData?.id) {
+    //   propertyDetails = this.propertyService.updateData;
+    //   this.propertyForm = this.initialFormValues(propertyDetails);
+    //   this.propertyService.setFormValue('DETAILS', this.propertyForm);
+    //   return;
+    // }
+    this.propertyForm = this.initialFormValues(propertyDetails);
   }
   initialFormValues(detailValues: any) {
     this.setFloorPlan(detailValues?.floorPlans);
@@ -62,6 +72,7 @@ export class DetailComponent implements OnInit {
     }
   }
   setFloorPlan(existingFloorPlans: any) {
+    console.log('existingFloorPlans', existingFloorPlans);
     const floorPlanValue = {
       title: '',
       image: null,
@@ -69,6 +80,18 @@ export class DetailComponent implements OnInit {
     }
     this.floorPlans = [];
     if (existingFloorPlans && existingFloorPlans.length > 0) {
+      // if (this.propertyService.updateData?.id) {
+      //   for (const dbFloorValue of existingFloorPlans) {
+      //     const floorValueObj = {
+      //       title: dbFloorValue.title,
+      //       image: null,
+      //       imageSrc: dbFloorValue.imageName ? `${ backendurl }/${dbFloorValue.path}` : '',
+      //       _id: dbFloorValue._id
+      //     }
+      //     this.floorPlans.push(floorValueObj);
+      //   }
+      //   return;
+      // }
       this.floorPlans = existingFloorPlans;
       return;
     }
@@ -97,6 +120,7 @@ export class DetailComponent implements OnInit {
       return;
     }
     const selectedFile = event.target?.files[0];
+    console.log('selectedFile', selectedFile);
     const fileExt = selectedFile.name.split('.').pop();
     if (['jpg', 'jpeg', 'png'].indexOf(fileExt) <= -1) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please upload only image file` });
@@ -105,6 +129,10 @@ export class DetailComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       floorData.imageSrc = e.target.result;
+      selectedFile._id = floorData._id || Date.now();
+      selectedFile.requestedFileName = selectedFile.name;
+      selectedFile.requestedFileSize = selectedFile.size;
+      selectedFile.requestedFileType = selectedFile.type;
       floorData.image = selectedFile;
     };
     reader.readAsDataURL(selectedFile);
@@ -139,6 +167,11 @@ export class DetailComponent implements OnInit {
       const propertyFormNewValue = this.propertyService.getFormValue();
       console.log('propertyFormNewValue.details', propertyFormNewValue.details);
       setTimeout(() => {
+        if (this.propertyService.updateId) {
+          this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/images`);
+          this.submitLoading = false;
+          return;  
+        }
         this.router.navigateByUrl(`/profile/add-property/images`);
         this.submitLoading = false;
       }, 1000);
@@ -146,6 +179,10 @@ export class DetailComponent implements OnInit {
   }
 
   onPreviousPage(): void {
+    if (this.propertyService.updateId) {
+      this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/general`);
+      return;
+    }
     this.router.navigateByUrl(`/profile/add-property/general`);
   }
 

@@ -27,12 +27,22 @@ export class GeneralComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const generalDetails = this.propertyService.getFormValue().general;
-    this.propertyForm = this.initialFormValues(generalDetails);
+    this.setupFormData();
     this.errors = {};
     this.getPropertyTypesList();
     this.getPropertyStatusList();
     this.getCityList();
+  }
+  setupFormData() {
+    const generalDetails = this.propertyService.getFormValue().general;
+    // if (!this.propertyService.updateData?.id) {
+    //   generalDetails = this.propertyService.updateData;
+    //   generalDetails.type = generalDetails.propertyType;
+    //   this.propertyForm = this.initialFormValues(generalDetails);
+    //   this.propertyService.setFormValue('GENERAL', this.propertyForm);
+    //   return;
+    // }
+    this.propertyForm = this.initialFormValues(generalDetails);
   }
   initialFormValues(generalValues: any) {
     return {
@@ -90,6 +100,11 @@ export class GeneralComponent implements OnInit {
       const propertyFormNewValue = this.propertyService.getFormValue();
       console.log('propertyFormNewValue.general', propertyFormNewValue.general);
       setTimeout(() => {
+        if (this.propertyService.updateId) {
+          this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/details`);
+          this.submitLoading = false;
+          return;
+        }
         this.router.navigateByUrl(`/profile/add-property/details`);
         this.submitLoading = false;
       }, 1000);

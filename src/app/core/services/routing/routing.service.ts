@@ -25,7 +25,9 @@ export class RoutingService {
           `/profile/add-property/details`,
           `/profile/add-property/seller-details`,
         ]
-        if (noSpinnerRoutes.indexOf(event.url) === -1) {
+        const routeInclude = event.url.includes('profile/edit-property');
+        console.log('routeInclude', routeInclude);
+        if (noSpinnerRoutes.indexOf(event.url) === -1 && !routeInclude) {
           this.startPreLoader();  
         }
         

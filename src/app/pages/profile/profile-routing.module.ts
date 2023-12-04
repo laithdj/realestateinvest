@@ -46,7 +46,30 @@ const routes: Routes = [
   },
   {
     path: 'edit-property/:id',
-    component: AddEditPropertyComponent
+    component: AddEditPropertyComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'general',
+        pathMatch: 'full'
+      },
+      {
+        path: 'general',
+        component: GeneralComponent
+      },
+      {
+        path: 'images',
+        component: PropertyImagesComponent
+      },
+      {
+        path: 'details',
+        component: DetailComponent
+      },
+      {
+        path: 'seller-details',
+        component: SellerDetailsComponent
+      }
+    ]
   }
 ];
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { baseurl } from 'src/environments/environment';
 
 
@@ -15,12 +16,14 @@ export class PropertyService {
     images: {} as any,
     sellerDetails: {} as any,
   };
+  updateId: string;
+  updateData = {} as any;
 
   constructor(
     private http: HttpClient
   ) { }
 
-  setFormValue(formType: string, formValues: any) {
+  setFormValue(formType: 'GENERAL' | 'DETAILS' | 'IMAGES' | 'SELLER_DETAILS', formValues: any) {
     console.log('formType', formType);
     console.log('formValues', formValues);
     switch (formType) {
@@ -69,8 +72,11 @@ export class PropertyService {
     console.log('propertyData', propertyData);
     const formData: any = new FormData();
     if (propertyData.images?.length > 0) {
-      for (let i = 0; i < propertyData.images.length; i++) {
-        formData.append("images", propertyData.images[i], propertyData.images[i]['name']);
+      for (const imageValue of propertyData.images) {
+        if (!imageValue?.name) {
+          continue;
+        }
+        formData.append("images", imageValue, imageValue.name);
       }
     }
     if (propertyData.details.floorPlans?.length) {
@@ -85,10 +91,37 @@ export class PropertyService {
     formData.append('propertyData', JSON.stringify(propertyData));
     return this.http.post(`${baseurl}/property`, formData);
   }
+  updateProperty(propertyId: string): any {
+    const propertyData = this.propertyForm;
+    console.log('propertyData', propertyData);
+    const formData: any = new FormData();
+    if (propertyData.images?.length > 0) {
+      for (const imageValue of propertyData.images) {
+        if (!imageValue?.name) {
+          continue;
+        }
+        formData.append("images", imageValue, imageValue.name);
+      }
+    }
+    if (propertyData.details.floorPlans?.length) {
+      for (const floorPlanValue of propertyData.details.floorPlans) {
+        if (!floorPlanValue.image?.name) {
+          continue;
+        }
+        delete floorPlanValue.imageSrc;
+        formData.append("floorPlanImages", floorPlanValue.image, `${floorPlanValue.image.name}`);
+      }
+    }
+    formData.append('propertyData', JSON.stringify(propertyData));
+    return this.http.put(`${baseurl}/property/${propertyId}`, formData);
+  }
   getUserProperties(): any {
     return this.http.get(`${baseurl}/property/user-properties`);
   }
   deleteProperty(propertyId: string): any {
     return this.http.delete(`${baseurl}/property/${propertyId}`);
+  }
+  getPropertiesById(propertyId: string): any {
+    return this.http.get(`${baseurl}/property/${propertyId}`);
   }
 }

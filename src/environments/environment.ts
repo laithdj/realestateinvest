@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
 };
-export const baseurl = `http://localhost:3001/v1`
+export const backendurl = `http://localhost:3001`;
+export const baseurl = `${backendurl}/v1`;
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -14,12 +14,12 @@
     </div>
   </div>
   <div class="row uploaded-image-section" *ngIf="previewImages?.length > 0">
-    <div class="col-2 image-section" *ngFor="let imageData of previewImages">
+    <div class="col-2 image-section" *ngFor="let imageData of previewImages; let i = index">
       <div class="row">
         <div class="col-12 img-section">
           <img [src]="imageData.image" class="img-fluid" />
           <div class="remove-btn">
-            <button type="button" class="btn btn-outline-danger btn-sm">Remove</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="onRemoveImage(imageData, i)">Remove</button>
           </div>
         </div>
       </div>
