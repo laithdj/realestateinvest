@@ -93,6 +93,24 @@ $color-danger-border: 1px solid #dc3545;
 }
 
 /* property-list page */
+.rld-single-select {
+  &::after {
+    display: none !important;
+  }
+  .ng-select-container {
+    height: 60px !important;
+    border: 1px solid #e8e8e8 !important;
+  }
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  text-align: left !important;
+}
+.explore__form-checkbox-list {
+  .ng-select.ng-select-single .ng-select-container {
+    height: 50px !important;
+    border: 1px solid #e8e8e8 !important;
+  }
+}
 .widget.widget-contact-box .media .media-body .item-rating ul li {
   margin-right: 5px;
 }

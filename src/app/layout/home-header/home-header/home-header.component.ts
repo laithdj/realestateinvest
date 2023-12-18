@@ -9,8 +9,8 @@ const subscriberList: Array<Subscription> = []
 
 declare var $: any;
 declare var WOW: any;
-declare var noUiSlider: any;
-declare var wNumb: any;
+// declare var noUiSlider: any;
+// declare var wNumb: any;
 declare var Swiper: any;
 
 @Component({
@@ -139,14 +139,12 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
         /*-------------------------------------
         dropdown Filter
         -------------------------------------*/
-        $(".dropdown-filter, .rt-filter-btn-1").on("click", function () {
-          $(".explore__form-checkbox-list").toggleClass("filter-block");
-        });
+        // $(".dropdown-filter, .rt-filter-btn-1").on("click", function () {
+        //   $(".explore__form-checkbox-list").toggleClass("filter-block");
+        // });
 
 
 
-        /*----------------------------- Product Image Zoom --------------------------------*/
-        // $('.zoom-image-hover').zoom();
         /*-------------------------------------
         Wow Js
         -------------------------------------*/
@@ -316,30 +314,7 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
         //     }
         //   });
         // }
-        // // Price range filter
-        // let priceSlider4 = document.getElementById("price-range-filter-4") as any;
-        // if (priceSlider4) {
-        //   noUiSlider.create(priceSlider4, {
-        //     start: [0, 500000],
-        //     connect: true,
-        //     range: {
-        //       min: 0,
-        //       max: 700000,
-        //     },
-        //     format: wNumb({
-        //       decimals: 0,
-        //     }),
-        //   });
-        //   let marginMin = document.getElementById("price-range-min-4"),
-        //     marginMax = document.getElementById("price-range-max-4");
-        //   priceSlider4.noUiSlider.on("update", function (values, handle) {
-        //     if (handle) {
-        //       marginMax.innerHTML = values[handle];
-        //     } else {
-        //       marginMin.innerHTML = values[handle];
-        //     }
-        //   });
-        // }
+        
 
         /*---------------------------------------
         // rt-slider-style-6
@@ -399,33 +374,7 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
           },
         });
 
-        var featureBoxSlider = new Swiper(".featured-thum-slider2", {
-          spaceBetween: 5,
-          slidesPerView: 5,
-          freeMode: true,
-          watchSlidesVisibility: true,
-          watchSlidesProgress: true,
-          loop: true,
-          breakpoints: {
-            0: {
-              slidesPerView: 3,
-            },
-            768: {
-              slidesPerView: 5,
-            },
-          },
-        });
-
-        var featuredBoxThumbs = new Swiper(".feature-box3", {
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-          loop: true,
-          thumbs: {
-            swiper: featureBoxSlider,
-          },
-        });
+        
 
         var swiper5 = new Swiper(".brand-layout", {
           slidesPerView: 5,
