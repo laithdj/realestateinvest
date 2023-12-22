@@ -22,45 +22,38 @@
       <div class="col-lg-4 widget-break-lg sidebar-widget">
         <div class="widget widget-advanced-search">
           <h3 class="widget-subtitle">Advanced Search</h3>
-          <form action="/home" class="map-forms map-form-style-2">
-            <input type="text" class="form-control" placeholder="What are you looking for?">
+          <form class="map-forms map-form-style-2">
+            <input type="text" name="searchTitle" [(ngModel)]="searchForm.title" class="form-control" placeholder="What are you looking for?" />
             <div class="row">
               <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
-                  <select class="select single-select mr-0">
-                    <option value="1">Property Type</option>
-                    <option value="2">Family House</option>
-                    <option value="3">Apartment</option>
-                    <option value="3">Condo</option>
-                  </select>
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Property Type" name="searchType" [(ngModel)]="searchForm.type">
+                    <ng-option value="ALL">All Property Type</ng-option>
+                    <ng-option [value]="typeValue.id" *ngFor="let typeValue of propertyTypes">{{typeValue.type}}</ng-option>
+                  </ng-select>
                 </div>
               </div>
               <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
-                  <select class="select single-select mr-0">
-                    <option value="1">All Categories</option>
-                    <option value="2">Rent</option>
-                    <option value="3">Sell</option>
-                    <option value="3">Buy</option>
-                  </select>
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Category" name="searchCategory" [(ngModel)]="searchForm.category">
+                    <ng-option value="ALL">All Categories</ng-option>
+                    <ng-option [value]="statusValue.id" *ngFor="let statusValue of propertyStatusList">{{statusValue.status}}</ng-option>
+                  </ng-select>
                 </div>
               </div>
               <div class="col-lg-12 pl-15">
                 <div class="rld-single-select">
-                  <select class="select single-select mr-0">
-                    <option value="1">All Cities</option>
-                    <option value="2">Los Angeles</option>
-                    <option value="3">Chicago</option>
-                    <option value="3">Philadelphia</option>
-                  </select>
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select City" name="searchCity" [(ngModel)]="searchForm.city">
+                    <ng-option value="ALL">All Cities</ng-option>
+                    <ng-option [value]="cityValue.id" *ngFor="let cityValue of cityList">{{cityValue.name}}</ng-option>
+                  </ng-select>
                 </div>
               </div>
             </div>
           </form>
           <div class="banner-search-wrap banner-search-wrap-2">
             <div class="rld-main-search rld-main-search3">
-              <div class="main-search-field-2">
-                <!-- Area Range -->
+              <!-- <div class="main-search-field-2">
                 <div class="price-range-wrapper">
                   <div class="range-box">
                     <div class="price-label">Price:</div>
@@ -75,12 +68,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="filter-button">
-                <a routerLink="/properties/1" class="filter-btn1 search-btn">Search<i class="fas fa-search"></i></a>
+                <button type="button" (click)="onAdvanceSearch()" class="filter-btn1 search-btn">Search<i class="fas fa-search"></i></button>
               </div>
             </div>
-            <!--/ End Search Form -->
           </div>
         </div>
         <!-- <div class="widget widget-listing-box1">
@@ -144,7 +136,7 @@
         </div> -->
       </div>
       <div class="col-lg-8">
-        <div class="row justify-content-center">
+        <!-- <div class="row justify-content-center">
           <div class="col-lg-12 col-md-12">
             <div class="item-shorting-box">
               <div class="shorting-title">
@@ -160,7 +152,7 @@
                     <option value="3">Low Price</option>
                   </select>
                 </div>
-                <!-- <div class="grid-button">
+                <div class="grid-button">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                       <a class="nav-link" data-bs-toggle="tab" href="#mylisting"><i class="fas fa-th"></i></a>
@@ -169,26 +161,27 @@
                       <a class="nav-link active" data-bs-toggle="tab" href="#reviews"><i class="fas fa-list-ul"></i></a>
                     </li>
                   </ul>
-                </div> -->
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="tab-style-1 tab-style-3">
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="reviews" role="tabpanel">
               <div class="row">
-                <div class="col-lg-12" *ngFor="let pData of [1,2,3,4]">
+                <div class="col-lg-12" *ngFor="let pData of propertyList">
                   <div class="property-box2 property-box4 wow animated fadeInUp" data-wow-delay=".6s">
                     <div class="item-img">
-                      <a routerLink="/properties/1"><img src="/assets/img/blog/blog13.jpg" alt="blog" width="250"
-                          height="200"></a>
-                      <div class="item-category-box1">
-                        <div class="item-category">For Rent</div>
-                      </div>
+                      <a routerLink="/properties/{{pData.id}}">
+                        <img [src]="pData.image" alt="blog" width="250" height="200">
+                      </a>
+                      <!-- <div class="item-category-box1">
+                        <div class="item-category">{{pData.propertyStatus}}</div>
+                      </div> -->
                     </div>
                     <div class="item-content item-content-property">
-                      <div class="item-category10"><a routerLink="/properties/1">Appartment</a></div>
+                      <div class="item-category10"><a routerLink="/properties/{{pData.id}}">{{pData.propertyType}}</a></div>
                       <!-- <div class="react-icon react-icon-2">
                         <ul>
                           <li>
@@ -205,21 +198,21 @@
                         </ul>
                       </div> -->
                       <div class="verified-area">
-                        <h3 class="item-title"><a routerLink="/properties/1">Family House For Rent {{pData}}</a></h3>
+                        <h3 class="item-title"><a routerLink="/properties/{{pData.id}}">{{pData.title}}</a></h3>
                       </div>
-                      <div class="location-area"><i class="flaticon-maps-and-flags"></i>Downey, California</div>
+                      <div class="location-area"><i class="flaticon-maps-and-flags"></i>{{pData.areaName}}, {{pData.city}}</div>
                       <div class="item-categoery3">
                         <ul>
-                          <li><i class="flaticon-bed"></i>Beds: 03</li>
-                          <li><i class="flaticon-shower"></i>Baths: 02</li>
-                          <li><i class="flaticon-two-overlapping-square"></i>931 Sqft</li>
+                          <li><i class="flaticon-two-overlapping-square"></i>{{pData.propertyStatus}}</li>
+                          <!-- <li><i class="flaticon-shower"></i>Baths: 02</li>
+                          <li><i class="flaticon-two-overlapping-square"></i>931 Sqft</li> -->
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="pagination-style-1">
+              <!-- <div class="pagination-style-1">
                 <ul class="pagination">
                   <li class="page-item">
                     <a class="page-link" routerLink="/properties" aria-label="Previous">
@@ -238,7 +231,7 @@
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

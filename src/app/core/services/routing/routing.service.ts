@@ -18,8 +18,19 @@ export class RoutingService {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show progress spinner or progress bar
-        console.log('Route change detected');
-        this.startPreLoader();
+        console.log('Route change detected', event.url);
+        const noSpinnerRoutes = [
+          `/profile/add-property/general`,
+          `/profile/add-property/images`,
+          `/profile/add-property/details`,
+          `/profile/add-property/seller-details`,
+        ]
+        const routeInclude = event.url.includes('profile/edit-property');
+        console.log('routeInclude', routeInclude);
+        if (noSpinnerRoutes.indexOf(event.url) === -1 && !routeInclude) {
+          this.startPreLoader();  
+        }
+        
       }
 
       if (event instanceof NavigationEnd) {

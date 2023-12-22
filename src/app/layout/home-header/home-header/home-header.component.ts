@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService, LoggedInUser } from '@services/auth/auth.service';
 import { RoutingService } from '@services/routing/routing.service';
 import { ScriptLoaderService } from '@services/script-loader/script-loader.service';
 
@@ -7,8 +9,8 @@ const subscriberList: Array<Subscription> = []
 
 declare var $: any;
 declare var WOW: any;
-declare var noUiSlider: any;
-declare var wNumb: any;
+// declare var noUiSlider: any;
+// declare var wNumb: any;
 declare var Swiper: any;
 
 @Component({
@@ -19,15 +21,31 @@ declare var Swiper: any;
 export class HomeHeaderComponent implements OnInit, AfterViewInit {
 
   isHomePage: boolean = false;
+  loginUserData: LoggedInUser | null;
 
   constructor(
+    private router: Router,
     private routing: RoutingService,
-    private scriptLoader: ScriptLoaderService
+    private scriptLoader: ScriptLoaderService,
+    private authService: AuthService
   ) {
     // this.fixedHeader();
   }
 
   ngOnInit(): void {
+
+    subscriberList.push(
+      this.authService.loginState.subscribe(loginState => {
+        console.log('loginState', loginState);
+        this.loginUserData = this.authService.getUser();
+        console.log('this.loginUserData', this.loginUserData);
+        // if (loginState) {
+        //   this.loginUserData = this.authService.getUser();
+        // } else {
+        //   this.loginUserData = this.authService.getUser();
+        // }
+      })
+    );
     subscriberList.push(
       this.routing.$currentPage.subscribe(currentPage => {
         this.isHomePage = false;
@@ -36,7 +54,7 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
         }
         // this.scriptLoader.loadScript();
 
-        
+
         this.windowScroll();
         this.fixedHeader();
         this.mobileMenuToggle();
@@ -60,9 +78,12 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
         // Tooltip
         ------------------------------*/
         $(function () {
-          $('[data-bs-toggle="tooltip"]').tooltip({
-            offset: [0, 5],
-          });
+          $('[data-bs-toggle="tooltip"]').tooltip('dispose');
+          setTimeout(() => {
+            $('[data-bs-toggle="tooltip"]').tooltip({
+              offset: [0, 5],
+            });  
+          }, 500);
         });
 
         /*-------------------------------------
@@ -118,14 +139,12 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
         /*-------------------------------------
         dropdown Filter
         -------------------------------------*/
-        $(".dropdown-filter, .rt-filter-btn-1").on("click", function () {
-          $(".explore__form-checkbox-list").toggleClass("filter-block");
-        });
+        // $(".dropdown-filter, .rt-filter-btn-1").on("click", function () {
+        //   $(".explore__form-checkbox-list").toggleClass("filter-block");
+        // });
 
-        
 
-        /*----------------------------- Product Image Zoom --------------------------------*/
-        // $('.zoom-image-hover').zoom();
+
         /*-------------------------------------
         Wow Js
         -------------------------------------*/
@@ -224,101 +243,78 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
             800
           );
         });
-        let priceSlider = document.getElementById("price-range-filter") as any;
-        if (priceSlider) {
-          noUiSlider.create(priceSlider, {
-            start: [10, 70],
-            connect: true,
-            range: {
-              min: 0,
-              max: 100,
-            },
-            format: wNumb({
-              decimals: 0,
-            }),
-          });
-          let marginMin = document.getElementById("price-range-min"),
-            marginMax = document.getElementById("price-range-max");
-          priceSlider.noUiSlider.on("update", function (values, handle) {
-            if (handle) {
-              marginMax.innerHTML = values[handle] + "%";
-            } else {
-              marginMin.innerHTML = values[handle] + "%";
-            }
-          });
-        }
-        // Price range filter
-        let priceSlider2 = document.getElementById("price-range-filter-2") as any;
-        if (priceSlider2) {
-          noUiSlider.create(priceSlider2, {
-            start: [0, 500],
-            connect: true,
-            range: {
-              min: 0,
-              max: 700,
-            },
-            format: wNumb({
-              decimals: 0,
-            }),
-          });
-          let marginMin = document.getElementById("price-range-min-2"),
-            marginMax = document.getElementById("price-range-max-2");
-          priceSlider2.noUiSlider.on("update", function (values, handle) {
-            if (handle) {
-              marginMax.innerHTML = values[handle];
-            } else {
-              marginMin.innerHTML = values[handle];
-            }
-          });
-        }
-        // Price range filter
-        let priceSlider3 = document.getElementById("price-range-filter-3") as any;
-        if (priceSlider3) {
-          noUiSlider.create(priceSlider3, {
-            start: [0, 20000],
-            connect: true,
-            range: {
-              min: 0,
-              max: 30000,
-            },
-            format: wNumb({
-              decimals: 0,
-            }),
-          });
-          let marginMin = document.getElementById("price-range-min-3"),
-            marginMax = document.getElementById("price-range-max-3");
-          priceSlider3.noUiSlider.on("update", function (values, handle) {
-            if (handle) {
-              marginMax.innerHTML = values[handle];
-            } else {
-              marginMin.innerHTML = values[handle];
-            }
-          });
-        }
-        // Price range filter
-        let priceSlider4 = document.getElementById("price-range-filter-4") as any;
-        if (priceSlider4) {
-          noUiSlider.create(priceSlider4, {
-            start: [0, 500000],
-            connect: true,
-            range: {
-              min: 0,
-              max: 700000,
-            },
-            format: wNumb({
-              decimals: 0,
-            }),
-          });
-          let marginMin = document.getElementById("price-range-min-4"),
-            marginMax = document.getElementById("price-range-max-4");
-          priceSlider4.noUiSlider.on("update", function (values, handle) {
-            if (handle) {
-              marginMax.innerHTML = values[handle];
-            } else {
-              marginMin.innerHTML = values[handle];
-            }
-          });
-        }
+        // let priceSlider = document.getElementById("price-range-filter") as any;
+        // if (priceSlider) {
+        //   noUiSlider.create(priceSlider, {
+        //     start: [10, 70],
+        //     connect: true,
+        //     range: {
+        //       min: 0,
+        //       max: 100,
+        //     },
+        //     format: wNumb({
+        //       decimals: 0,
+        //     }),
+        //   });
+        //   let marginMin = document.getElementById("price-range-min"),
+        //     marginMax = document.getElementById("price-range-max");
+        //   priceSlider.noUiSlider.on("update", function (values, handle) {
+        //     if (handle) {
+        //       marginMax.innerHTML = values[handle] + "%";
+        //     } else {
+        //       marginMin.innerHTML = values[handle] + "%";
+        //     }
+        //   });
+        // }
+        // // Price range filter
+        // let priceSlider2 = document.getElementById("price-range-filter-2") as any;
+        // if (priceSlider2) {
+        //   noUiSlider.create(priceSlider2, {
+        //     start: [0, 500],
+        //     connect: true,
+        //     range: {
+        //       min: 0,
+        //       max: 700,
+        //     },
+        //     format: wNumb({
+        //       decimals: 0,
+        //     }),
+        //   });
+        //   let marginMin = document.getElementById("price-range-min-2"),
+        //     marginMax = document.getElementById("price-range-max-2");
+        //   priceSlider2.noUiSlider.on("update", function (values, handle) {
+        //     if (handle) {
+        //       marginMax.innerHTML = values[handle];
+        //     } else {
+        //       marginMin.innerHTML = values[handle];
+        //     }
+        //   });
+        // }
+        // // Price range filter
+        // let priceSlider3 = document.getElementById("price-range-filter-3") as any;
+        // if (priceSlider3) {
+        //   noUiSlider.create(priceSlider3, {
+        //     start: [0, 20000],
+        //     connect: true,
+        //     range: {
+        //       min: 0,
+        //       max: 30000,
+        //     },
+        //     format: wNumb({
+        //       decimals: 0,
+        //     }),
+        //   });
+        //   let marginMin = document.getElementById("price-range-min-3"),
+        //     marginMax = document.getElementById("price-range-max-3");
+        //   priceSlider3.noUiSlider.on("update", function (values, handle) {
+        //     if (handle) {
+        //       marginMax.innerHTML = values[handle];
+        //     } else {
+        //       marginMin.innerHTML = values[handle];
+        //     }
+        //   });
+        // }
+        
 
         /*---------------------------------------
         // rt-slider-style-6
@@ -378,33 +374,7 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
           },
         });
 
-        var featureBoxSlider = new Swiper(".featured-thum-slider2", {
-          spaceBetween: 5,
-          slidesPerView: 5,
-          freeMode: true,
-          watchSlidesVisibility: true,
-          watchSlidesProgress: true,
-          loop: true,
-          breakpoints: {
-            0: {
-              slidesPerView: 3,
-            },
-            768: {
-              slidesPerView: 5,
-            },
-          },
-        });
-
-        var featuredBoxThumbs = new Swiper(".feature-box3", {
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-          loop: true,
-          thumbs: {
-            swiper: featureBoxSlider,
-          },
-        });
+        
 
         var swiper5 = new Swiper(".brand-layout", {
           slidesPerView: 5,
@@ -502,7 +472,7 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
           topbarH = $("#topbar-wrap").outerHeight() || 0,
           targrtScroll = topbarH,
           header = $("header");
-          
+
         if ($(window).scrollTop() > targrtScroll) {
           header.addClass("sticky");
           stickyPlaceHolder.height(menuH);
@@ -557,6 +527,20 @@ export class HomeHeaderComponent implements OnInit, AfterViewInit {
         }
       );
     }
+  }
+
+  onLogout(): void {
+    this.authService.logout().subscribe(
+      (logoutData) => {
+        console.log('logoutData', logoutData);
+        $('[data-bs-toggle="tooltip"]').tooltip('dispose');
+        this.authService.removeUser();
+        this.router.navigateByUrl(`/`);
+      },
+      (logoutError) => {
+        console.log('logoutError', logoutError);
+      }
+    )
   }
 
 }
