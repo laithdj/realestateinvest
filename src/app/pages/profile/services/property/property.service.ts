@@ -124,6 +124,9 @@ export class PropertyService {
   getPropertiesById(propertyId: string): any {
     return this.http.get(`${baseurl}/property/${propertyId}`);
   }
+  getPropertiesByIdEdit(propertyId: string): any {
+    return this.http.get(`${baseurl}/property/edit-view/${propertyId}`);
+  }
   getLatestProperties(propertyId: string): any {
     return this.http.get(`${baseurl}/property/latest-properties?id=${propertyId}`);
   }

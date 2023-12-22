@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { PropertyService } from '@pages/profile/services/property/property.service';
 import { backendurl } from 'src/environments/environment';
+import * as moment from 'moment';
 
 declare var $: any;
 declare var Swiper: any;
@@ -82,16 +83,32 @@ export class PropertyDetailComponent implements OnInit {
       (propRes) => {
         console.log('propRes', propRes);
         this.details = propRes;
+        this.details.timeLong = this.getPostedTimeline(propRes.createdAt);
         setTimeout(() => {
-          this.loadSlider();  
+          this.loadSlider();
         }, 1000);
-        
+
       },
       (propErr) => {
         console.error('propErr', propErr);
         this.details = {};
       }
     );
+  }
+  getPostedTimeline(createdDate): string {
+    const years = moment().diff(createdDate, 'years');
+    if (years > 0) {
+      return `${years} years old`;
+    }
+    const months = moment().diff(createdDate, 'months');
+    if (months > 0) {
+      return `${months} months old`;
+    }
+    const days = moment().diff(createdDate, 'days');
+    if (days > 0) {
+      return `${days} days old`;
+    }
+    return ``;
   }
   getLatestProperties(propertyId: string) {
     this.latestProperties = [];

@@ -55,7 +55,7 @@ export class AddEditPropertyComponent implements OnInit {
     ];
   }
   getPropertyDetailsById(propertyId: string) {
-    this.propertyService.getPropertiesById(propertyId).subscribe(
+    this.propertyService.getPropertiesByIdEdit(propertyId).subscribe(
       (propRes) => {
         console.log('propRes', propRes);
         if (propRes?.id) {
