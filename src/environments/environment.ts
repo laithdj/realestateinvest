@@ -5,7 +5,9 @@ const location_ = location.host;
 export const environment = {
   production: false,
 };
-export const backendurl = `http://${location_}:3001`;
+// export const backendurl = `http://localhost:3001`;
+export const backendurl = `https://www.realinvestment.com.au:8080`;
+
 export const baseurl = `${backendurl}/v1`;
 
 /*
