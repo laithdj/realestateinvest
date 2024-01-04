@@ -50,6 +50,7 @@ export class DetailComponent implements OnInit {
     this.setFloorPlan(detailValues?.floorPlans);
     return {
       bedrooms: detailValues?.bedrooms || null,
+      bathrooms: detailValues?.bathrooms || null,
       propertyAge: detailValues?.propertyAge || null,
       landSize: detailValues?.landSize || '',
       area: detailValues?.area || '',
@@ -60,6 +61,7 @@ export class DetailComponent implements OnInit {
       propertyValueGrowth: detailValues?.propertyValueGrowth || null,
       rentalMarketPrice: detailValues?.rentalMarketPrice || null,
       vacancyRate: detailValues?.vacancyRate || null,
+      hideSalePrice: detailValues?.hideSalePrice || false,
       parkingAvailable: detailValues?.parkingAvailable || false,
       currentlyTenanted: detailValues?.currentlyTenanted || false,
       fireZone: detailValues?.fireZone || false,
@@ -142,7 +144,7 @@ export class DetailComponent implements OnInit {
     this.errors = {};
     if (this.submitted) {
       Object.keys(this.propertyForm).forEach(field => {
-        if (['rentYield','weeklyCurrentRent','weeeklyRentalAppraisal','rentalMarketPrice','vacancyRate','parkingAvailable','currentlyTenanted',
+        if (['rentYield','weeklyCurrentRent','weeeklyRentalAppraisal','rentalMarketPrice','vacancyRate','hideSalePrice','parkingAvailable','currentlyTenanted',
       'floodZone','fireZone','landDAApproved','isBodyCorporate','bodyCorporateValue'].indexOf(field) > -1) {
           return;
         }

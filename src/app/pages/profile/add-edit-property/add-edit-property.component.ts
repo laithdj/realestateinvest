@@ -73,6 +73,7 @@ export class AddEditPropertyComponent implements OnInit {
           this.propertyService.setFormValue('GENERAL', generalDetails);
           const propertyDetais = {
             bedrooms: propRes.bedrooms || null,
+            bathrooms: propRes.bathrooms || null,
             propertyAge: propRes.propertyAge || null,
             landSize: propRes.landSize || '',
             area: propRes.area || '',
@@ -83,6 +84,7 @@ export class AddEditPropertyComponent implements OnInit {
             propertyValueGrowth: propRes.propertyValueGrowth || null,
             rentalMarketPrice: propRes.rentalMarketPrice || null,
             vacancyRate: propRes.vacancyRate || null,
+            hideSalePrice: propRes.hideSalePrice || false,
             parkingAvailable: propRes.parkingAvailable || false,
             currentlyTenanted: propRes.currentlyTenanted || false,
             fireZone: propRes.fireZone || false,

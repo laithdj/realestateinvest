@@ -33,19 +33,52 @@
                   </ng-select>
                 </div>
               </div>
-              <div class="col-lg-12 pl-15 mb-0">
+              <!-- <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Category" name="searchCategory" [(ngModel)]="searchForm.category">
                     <ng-option value="ALL">All Categories</ng-option>
                     <ng-option [value]="statusValue.id" *ngFor="let statusValue of propertyStatusList">{{statusValue.status}}</ng-option>
                   </ng-select>
                 </div>
-              </div>
+              </div> -->
               <div class="col-lg-12 pl-15">
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select City" name="searchCity" [(ngModel)]="searchForm.city">
                     <ng-option value="ALL">All Cities</ng-option>
                     <ng-option [value]="cityValue.id" *ngFor="let cityValue of cityList">{{cityValue.name}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Bedroom" name="searchBedrooms" [(ngModel)]="searchForm.bedrooms">
+                    <ng-option value="ALL">Bedrooms</ng-option>
+                    <ng-option [value]="bed" *ngFor="let bed of ['1','2','3','4','4+']">{{bed}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Bathrooms" name="searchBathrooms" [(ngModel)]="searchForm.bathrooms">
+                    <ng-option value="ALL">Bathrooms</ng-option>
+                    <ng-option [value]="bath" *ngFor="let bath of ['1','2','3','4','4+']">{{bath}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Sale Price" name="searchSalePrice" [(ngModel)]="searchForm.salePrice">
+                    <ng-option value="ALL">Sale Price</ng-option>
+                    <ng-option [value]="salePrice" *ngFor="let salePrice of ['0-100','101-300','301-500','501-800','801-1000','1000+']">{{salePrice}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Land DA Approved?" name="searchLandApproved" [(ngModel)]="searchForm.landDAApproved">
+                    <ng-option value="ALL">Land DA Approved?</ng-option>
+                    <ng-option value="YES">Yes</ng-option>
+                    <ng-option value="NO">No</ng-option>
                   </ng-select>
                 </div>
               </div>
@@ -203,7 +236,7 @@
                       <div class="location-area"><i class="flaticon-maps-and-flags"></i>{{pData.areaName}}, {{pData.city}}</div>
                       <div class="item-categoery3">
                         <ul>
-                          <li><i class="flaticon-two-overlapping-square"></i>{{pData.propertyStatus}}</li>
+                          <!-- <li><i class="flaticon-two-overlapping-square"></i>{{pData.propertyStatus}}</li> -->
                           <!-- <li><i class="flaticon-shower"></i>Baths: 02</li>
                           <li><i class="flaticon-two-overlapping-square"></i>931 Sqft</li> -->
                         </ul>

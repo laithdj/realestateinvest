@@ -13496,12 +13496,12 @@ body.slidemenuon .sidebarBtn .bar:nth-child(4) {
   border-radius: 3px;
   border-right: 0;
 }
-.single-property .property-heading .side-button ul li .side-btn:hover {
+.single-property .property-heading .side-button ul li .side-btn:not(.is-loading):hover {
   background-color: var(--rt-primary-dark);
   border-color: var(--rt-primary-dark);
   color: #fff;
 }
-.single-property .property-heading .side-button ul li .side-btn:hover i {
+.single-property .property-heading .side-button ul li .side-btn:not(.is-loading):hover i {
   animation: bottomtotop 0.3s ease-in-out;
 }
 .single-property .property-heading .side-button ul li .side-btn i {

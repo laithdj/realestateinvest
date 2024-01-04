@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
     city: null,
     category: null,
     bedrooms: null,
+    bathrooms: null,
+    salePrice: null,
     landDAApproved: null,
     amenities: []
   };
@@ -173,6 +175,12 @@ export class HomeComponent implements OnInit {
     if (this.homeSearchForm.amenities?.length) {
       filters.push(`amenities=${this.homeSearchForm.amenities.join('|')}`);
     }
+    if (this.homeSearchForm.bathrooms) {
+      filters.push(`bathrooms=${encodeURIComponent(this.homeSearchForm.bathrooms)}`);
+    }
+    if (this.homeSearchForm.salePrice) {
+      filters.push(`salePrice=${encodeURIComponent(this.homeSearchForm.salePrice)}`);
+    }
     if (filters.length) {
       filterURL += `?${filters.join('&')}`;
     }
@@ -192,6 +200,8 @@ export class HomeComponent implements OnInit {
       city: null,
       category: null,
       bedrooms: null,
+      bathrooms: null,
+      salePrice: null,
       landDAApproved: null,
       amenities: []
     };

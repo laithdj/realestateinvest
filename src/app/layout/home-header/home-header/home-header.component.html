@@ -1,4 +1,4 @@
-<header [class]="isHomePage ? 'header' : 'rt-header sticky-on'">
+<header [class]="isHomePage ? 'header no-print' : 'rt-header sticky-on no-print'">
   <div [id]="isHomePage ? 'rt-sticky-placeholder' : 'sticky-placeholder'"></div>
   <div [id]="isHomePage ? 'header-menu' : 'navbar-wrap'" class="header-menu menu-layout1" [ngClass]="{'menu-layout3': !isHomePage}">
     <div class="container">
@@ -191,7 +191,7 @@
     </div>
   </div>
 </header>
-<div class="rt-header-menu mean-container position-relative" id="meanmenu">
+<div class="rt-header-menu mean-container position-relative no-print" id="meanmenu">
   <div class="mean-bar">
     <a routerLink="/">
       <img src='assets/img/logo_light2.svg' alt='logo' class='img-fluid' />

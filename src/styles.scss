@@ -133,5 +133,12 @@ $color-danger-border: 1px solid #dc3545;
   font-weight: 500;
   color: #212121;
 }
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
+
 /* Importing Bootstrap SCSS file. */
 // @import '~bootstrap/scss/bootstrap';

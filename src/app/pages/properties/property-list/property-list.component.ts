@@ -28,7 +28,11 @@ export class PropertyListComponent implements OnInit {
     title: '',
     type: 'ALL',
     category: 'ALL',
-    city: 'ALL'
+    city: 'ALL',
+    salePrice: 'ALL',
+    bedrooms: 'ALL',
+    bathrooms: 'ALL',
+    landDAApproved: 'ALL'
   };
   propertyTypes = [];
   propertyStatusList = [];
@@ -106,6 +110,12 @@ export class PropertyListComponent implements OnInit {
     if (query.bedrooms) {
       filterValues.bedrooms = query.bedrooms;
     }
+    if (query.bathrooms) {
+      filterValues.bathrooms = query.bathrooms;
+    }
+    if (query.salePrice) {
+      filterValues.salePrice = query.salePrice;
+    }
     if (query.amenities) {
       filterValues.amenities = query.amenities.split('|');
     }
@@ -136,7 +146,8 @@ export class PropertyListComponent implements OnInit {
       }
     })
   }
-  getPropertyList(filterData?: { title: string; typeId: string; statusId: string; cityId: string; landDAApproved?: string; bedrooms?: string; amenities?: Array<string> }) {
+  // getPropertyList(filterData?: { title: string; typeId: string; statusId: string; cityId: string; landDAApproved?: string; bedrooms?: string; amenities?: Array<string> }) {
+  getPropertyList(filterData?: any) {
     this.isListLoading = true;
     this.propertyList = [];
     const postData = typeof filterData !== 'undefined' ? filterData : {};
@@ -186,6 +197,28 @@ export class PropertyListComponent implements OnInit {
     }
     if (this.searchForm.city !== 'ALL') {
       dataToSend.cityId = this.searchForm.city;
+    }
+    // searchForm = {
+    //   title: '',
+    //   type: 'ALL',
+    //   category: 'ALL',
+    //   city: 'ALL',
+    //   salePrice: 'ALL',
+    //   bedrooms: 'ALL',
+    //   bathrooms: 'ALL',
+    //   landDAApproved: 'ALL'
+    // };
+    if (this.searchForm.salePrice !== 'ALL') {
+      dataToSend.salePrice = this.searchForm.salePrice;
+    }
+    if (this.searchForm.bedrooms !== 'ALL') {
+      dataToSend.bedrooms = this.searchForm.bedrooms;
+    }
+    if (this.searchForm.bathrooms !== 'ALL') {
+      dataToSend.bathrooms = this.searchForm.bathrooms;
+    }
+    if (this.searchForm.landDAApproved !== 'ALL') {
+      dataToSend.landDAApproved = this.searchForm.landDAApproved;
     }
     this.getPropertyList(dataToSend);
   }

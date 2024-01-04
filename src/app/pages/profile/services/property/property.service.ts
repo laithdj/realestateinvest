@@ -124,6 +124,12 @@ export class PropertyService {
   getPropertiesById(propertyId: string): any {
     return this.http.get(`${baseurl}/property/${propertyId}`);
   }
+  updatePropertyCount(propertyId: string): any {
+    return this.http.put(`${baseurl}/property/update-count`, { propertyId });
+  }
+  getPropertyCsv(propertyId: string): any {
+    return this.http.post(`${baseurl}/property/get-property-csv`, { propertyId });
+  }
   getPropertiesByIdEdit(propertyId: string): any {
     return this.http.get(`${baseurl}/property/edit-view/${propertyId}`);
   }

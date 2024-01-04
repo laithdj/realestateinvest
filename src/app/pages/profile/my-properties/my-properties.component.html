@@ -30,7 +30,7 @@
                   <tr>
                     <th>Title</th>
                     <th>Type</th>
-                    <th>Status</th>
+                    <!-- <th>Status</th> -->
                     <th>City</th>
                     <th>Action</th>
                   </tr>
@@ -39,7 +39,7 @@
                   <tr *ngFor="let pData of propertyList">
                     <td>{{pData.title}}</td>
                     <td>{{pData.propertyType?.type}}</td>
-                    <td>{{pData.propertyStatus?.status}}</td>
+                    <!-- <td>{{pData.propertyStatus?.status}}</td> -->
                     <td>{{pData.city?.name}}</td>
                     <td class="action">
                       <a routerLink="/profile/edit-property/{{pData.id}}/general">

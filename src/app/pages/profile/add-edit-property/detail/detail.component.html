@@ -1,6 +1,6 @@
 <form id="rtcl-property-form" class="form-horizontal" autocomplete="nope" (submit)="onSubmitDetails()">
   <div class="row">
-    <div class="col-3">
+    <div class="col-2">
       <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.bedrooms}">
         <label class="control-label">
           How many Bedrooms? <strong class="rtcl-required">*</strong>
@@ -9,7 +9,16 @@
         <div class="error" *ngIf="submitted && !propertyForm.bedrooms">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-2">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.bathrooms}">
+        <label class="control-label">
+          How many Bathrooms? <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="bathrooms" class="form-control" [(ngModel)]="propertyForm.bathrooms" />
+        <div class="error" *ngIf="submitted && !propertyForm.bathrooms">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+    <div class="col-2">
       <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.propertyAge}">
         <label class="control-label">
           Property Age <strong class="rtcl-required">*</strong>
@@ -104,21 +113,28 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
+      <div class="form-group">
+        <input id="hideSalePrice" class="checkbox-custom" name="hideSalePrice" type="checkbox"
+          [(ngModel)]="propertyForm.hideSalePrice" />
+        <label for="hideSalePrice" class="checkbox-custom-label no-select">Hide Sales Price?</label>
+      </div>
+    </div>
+    <div class="col-3">
       <div class="form-group">
         <input id="parkingAvailable" class="checkbox-custom" name="parkingAvailable" type="checkbox"
           [(ngModel)]="propertyForm.parkingAvailable" />
         <label for="parkingAvailable" class="checkbox-custom-label no-select">Parking Available?</label>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <div class="form-group">
         <input id="currentlyTenanted" class="checkbox-custom" name="currentlyTenanted" type="checkbox"
           [(ngModel)]="propertyForm.currentlyTenanted" />
         <label for="currentlyTenanted" class="checkbox-custom-label no-select">Currently Tenanted?</label>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <div class="form-group">
         <input id="floodZone" class="checkbox-custom" name="floodZone" type="checkbox"
           [(ngModel)]="propertyForm.floodZone" />
@@ -127,21 +143,21 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <div class="form-group">
         <input id="fireZone" class="checkbox-custom" name="fireZone" type="checkbox"
           [(ngModel)]="propertyForm.fireZone" />
         <label for="fireZone" class="checkbox-custom-label no-select">Fire Zone?</label>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <div class="form-group">
         <input id="landDAApproved" class="checkbox-custom" name="landDAApproved" type="checkbox"
           [(ngModel)]="propertyForm.landDAApproved" />
         <label for="landDAApproved" class="checkbox-custom-label no-select">Land DA Approved?</label>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <div class="form-group">
         <input id="isBodyCorporate" class="checkbox-custom" name="isBodyCorporate" type="checkbox"
           [(ngModel)]="propertyForm.isBodyCorporate" />

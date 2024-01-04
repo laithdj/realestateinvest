@@ -82,6 +82,9 @@ export class GeneralComponent implements OnInit {
     this.errors = {};
     if (this.submitted) {
       Object.keys(this.propertyForm).forEach(field => {
+        if (['propertyStatus'].indexOf(field) > -1) {
+          return;
+        }
         if (!this.propertyForm[field]) {
           this.errors[field] = true;
         }

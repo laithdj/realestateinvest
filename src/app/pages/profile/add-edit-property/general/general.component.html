@@ -16,21 +16,21 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-4" [ngClass]="{'with-error': submitted && !propertyForm.propertyStatus}">
+    <!-- <div class="form-group col-4" [ngClass]="{'with-error': submitted && !propertyForm.propertyStatus}">
       <label class="control-label">
         Property Status <strong class="rtcl-required">*</strong>
       </label>
       <ng-select [(ngModel)]="propertyForm.propertyStatus" name="propertyStatus" [items]="propertyStatusList" bindValue="id" bindLabel="status" [multiple]="false"></ng-select>
       <div class="error" *ngIf="submitted && !propertyForm.propertyStatus">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
-    </div>
-    <div class="form-group col-4" [ngClass]="{'with-error': submitted && !propertyForm.city}">
+    </div> -->
+    <div class="form-group col-6" [ngClass]="{'with-error': submitted && !propertyForm.city}">
       <label class="control-label">
         Property in which city? <strong class="rtcl-required">*</strong>
       </label>
       <ng-select [(ngModel)]="propertyForm.city" name="city" [items]="cityList" bindValue="id" bindLabel="name" [multiple]="false"></ng-select>
       <div class="error" *ngIf="submitted && !propertyForm.city">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
     </div>
-    <div class="form-group col-4" [ngClass]="{'with-error': submitted && !propertyForm.areaName}">
+    <div class="form-group col-6" [ngClass]="{'with-error': submitted && !propertyForm.areaName}">
       <label class="control-label">
         Property in which Area? <strong class="rtcl-required">*</strong>
       </label>
