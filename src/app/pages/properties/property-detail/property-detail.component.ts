@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Route } from '@angular/router';
 import { PropertyService } from '@pages/profile/services/property/property.service';
 import { backendurl } from 'src/environments/environment';
 import * as moment from 'moment';
+import { AuthService } from '@services/auth/auth.service';
 
 declare var $: any;
 declare var Swiper: any;
@@ -21,9 +22,11 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
   backendurl = backendurl;
   swiperSliderMain = null;
   swiperSliderThumb = null;
+  isLoggedIn = false;
   constructor(
     private propertyService: PropertyService,
     private activateRoute: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +36,7 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
         this.id = param.id;
         this.getPropertyDetail(param.id);
         this.getLatestProperties(param.id);
+        this.isLoggedIn = this.authService.isLoggedIn();
       }
     })
   }

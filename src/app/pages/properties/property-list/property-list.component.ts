@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from '@pages/profile/services/property/property.service';
@@ -22,6 +23,8 @@ export class PropertyListComponent implements OnInit {
     propertyStatus: string;
     areaName: string;
     city: string;
+    salePrice: string;
+    hideSalePrice: boolean;
   }> = [];
   priceRangeFilter = null;
   searchForm = {
@@ -29,10 +32,25 @@ export class PropertyListComponent implements OnInit {
     type: 'ALL',
     category: 'ALL',
     city: 'ALL',
-    salePrice: 'ALL',
     bedrooms: 'ALL',
     bathrooms: 'ALL',
-    landDAApproved: 'ALL'
+    propertyAge: 'ALL',
+    landSize: 'ALL',
+    areaSize: 'ALL',
+    salePrice: 'ALL',
+    rentYield: 'ALL',
+    weeklyCurrentRent: 'ALL',
+    weeeklyRentalAppraisal: 'ALL',
+    propertyValueGrowth: 'ALL',
+    rentalMarketPrice: 'ALL',
+    vacancyRate: 'ALL',
+    bodyCorporateValue: 'ALL',
+    parkingAvailable: 'ALL',
+    currentlyTenanted: 'ALL',
+    floodZone: 'ALL',
+    fireZone: 'ALL',
+    landDAApproved: 'ALL',
+    isBodyCorporate: 'ALL',
   };
   propertyTypes = [];
   propertyStatusList = [];
@@ -42,6 +60,7 @@ export class PropertyListComponent implements OnInit {
   constructor(
     private propertyService: PropertyService,
     private activatedRoute: ActivatedRoute,
+    private viewport: ViewportScroller,
   ) { }
 
   ngOnInit(): void {
@@ -91,31 +110,40 @@ export class PropertyListComponent implements OnInit {
   //   }
   // }
   getFilterValues(query) {
-    const filterValues = {} as any;
-    if (query.title) {
-      filterValues.title = query.title;
+    let filterValues = {} as any;
+    if (query) {
+      filterValues = Object.assign({}, query);
     }
-    if (query.type) {
-      filterValues.typeId = query.type;
-    }
-    if (query.category) {
-      filterValues.statusId = query.category;
-    }
-    if (query.city) {
-      filterValues.cityId = query.city;
-    }
-    if (query.landDAApproved) {
-      filterValues.landDAApproved = query.landDAApproved;
-    }
-    if (query.bedrooms) {
-      filterValues.bedrooms = query.bedrooms;
-    }
-    if (query.bathrooms) {
-      filterValues.bathrooms = query.bathrooms;
-    }
-    if (query.salePrice) {
-      filterValues.salePrice = query.salePrice;
-    }
+    // if (query.title) {
+    //   filterValues.title = query.title;
+    // }
+    // if (query.type) {
+    //   filterValues.typeId = query.type;
+    // }
+    // if (query.category) {
+    //   filterValues.statusId = query.category;
+    // }
+    // if (query.city) {
+    //   filterValues.cityId = query.city;
+    // }
+    // if (query.landDAApproved) {
+    //   filterValues.landDAApproved = query.landDAApproved;
+    // }
+    // if (query.bedrooms) {
+    //   filterValues.bedrooms = query.bedrooms;
+    // }
+    // if (query.bathrooms) {
+    //   filterValues.bathrooms = query.bathrooms;
+    // }
+    // if (query.propertyAge) {
+    //   filterValues.propertyAge = query.propertyAge;
+    // }
+    // if (query.propertyAge) {
+    //   filterValues.propertyAge = query.propertyAge;
+    // }
+    // if (query.salePrice) {
+    //   filterValues.salePrice = query.salePrice;
+    // }
     if (query.amenities) {
       filterValues.amenities = query.amenities.split('|');
     }
@@ -167,6 +195,8 @@ export class PropertyListComponent implements OnInit {
               propertyStatus: propValue.propertyStatus?.status,
               areaName: propValue.areaName,
               city: propValue.city?.name,
+              salePrice: propValue.salePrice,
+              hideSalePrice: propValue.hideSalePrice
             })
           }
         }
@@ -198,29 +228,69 @@ export class PropertyListComponent implements OnInit {
     if (this.searchForm.city !== 'ALL') {
       dataToSend.cityId = this.searchForm.city;
     }
-    // searchForm = {
-    //   title: '',
-    //   type: 'ALL',
-    //   category: 'ALL',
-    //   city: 'ALL',
-    //   salePrice: 'ALL',
-    //   bedrooms: 'ALL',
-    //   bathrooms: 'ALL',
-    //   landDAApproved: 'ALL'
-    // };
-    if (this.searchForm.salePrice !== 'ALL') {
-      dataToSend.salePrice = this.searchForm.salePrice;
-    }
     if (this.searchForm.bedrooms !== 'ALL') {
       dataToSend.bedrooms = this.searchForm.bedrooms;
     }
     if (this.searchForm.bathrooms !== 'ALL') {
       dataToSend.bathrooms = this.searchForm.bathrooms;
     }
+    if (this.searchForm.propertyAge !== 'ALL') {
+      dataToSend.propertyAge = this.searchForm.propertyAge;
+    }
+    if (this.searchForm.landSize !== 'ALL') {
+      dataToSend.landSize = this.searchForm.landSize;
+    }
+    if (this.searchForm.areaSize !== 'ALL') {
+      dataToSend.areaSize = this.searchForm.areaSize;
+    }
+    if (this.searchForm.salePrice !== 'ALL') {
+      dataToSend.salePrice = this.searchForm.salePrice;
+    }
+    if (this.searchForm.rentYield !== 'ALL') {
+      dataToSend.rentYield = this.searchForm.rentYield;
+    }
+    if (this.searchForm.weeklyCurrentRent !== 'ALL') {
+      dataToSend.weeklyCurrentRent = this.searchForm.weeklyCurrentRent;
+    }
+    if (this.searchForm.weeeklyRentalAppraisal !== 'ALL') {
+      dataToSend.weeeklyRentalAppraisal = this.searchForm.weeeklyRentalAppraisal;
+    }
+    if (this.searchForm.propertyValueGrowth !== 'ALL') {
+      dataToSend.propertyValueGrowth = this.searchForm.propertyValueGrowth;
+    }
+    if (this.searchForm.rentalMarketPrice !== 'ALL') {
+      dataToSend.rentalMarketPrice = this.searchForm.rentalMarketPrice;
+    }
+    if (this.searchForm.vacancyRate !== 'ALL') {
+      dataToSend.vacancyRate = this.searchForm.vacancyRate;
+    }
+    if (this.searchForm.bodyCorporateValue !== 'ALL') {
+      dataToSend.bodyCorporateValue = this.searchForm.bodyCorporateValue;
+    }
+    if (this.searchForm.parkingAvailable !== 'ALL') {
+      dataToSend.parkingAvailable = this.searchForm.parkingAvailable;
+    }
+    if (this.searchForm.currentlyTenanted !== 'ALL') {
+      dataToSend.currentlyTenanted = this.searchForm.currentlyTenanted;
+    }
+    if (this.searchForm.floodZone !== 'ALL') {
+      dataToSend.floodZone = this.searchForm.floodZone;
+    }
+    if (this.searchForm.fireZone !== 'ALL') {
+      dataToSend.fireZone = this.searchForm.fireZone;
+    }
     if (this.searchForm.landDAApproved !== 'ALL') {
       dataToSend.landDAApproved = this.searchForm.landDAApproved;
     }
+    if (this.searchForm.isBodyCorporate !== 'ALL') {
+      dataToSend.isBodyCorporate = this.searchForm.isBodyCorporate;
+    }
     this.getPropertyList(dataToSend);
+    this.scrollToTop();
+  }
+
+  scrollToTop() {
+    this.viewport.scrollToPosition([0, 0]);
   }
 
 }

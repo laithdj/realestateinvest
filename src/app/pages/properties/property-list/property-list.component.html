@@ -67,9 +67,137 @@
               </div>
               <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Property Age" name="searchPropertyAge" [(ngModel)]="searchForm.propertyAge">
+                    <ng-option value="ALL">Property Age</ng-option>
+                    <ng-option [value]="propAge" *ngFor="let propAge of ['0-5','6-10','10-15','16-20','20+']">{{propAge}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Land Size (in sqmtr.)" name="searchLandSize" [(ngModel)]="searchForm.landSize">
+                    <ng-option value="ALL">Land Size (in sqmtr.)</ng-option>
+                    <ng-option [value]="landSize" *ngFor="let landSize of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">{{landSize}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Area (in sqmtr.)" name="searchAreaSize" [(ngModel)]="searchForm.areaSize">
+                    <ng-option value="ALL">Area (in sqmtr.)</ng-option>
+                    <ng-option [value]="areaSize" *ngFor="let areaSize of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">{{areaSize}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Sale Price" name="searchSalePrice" [(ngModel)]="searchForm.salePrice">
                     <ng-option value="ALL">Sale Price</ng-option>
-                    <ng-option [value]="salePrice" *ngFor="let salePrice of ['0-100','101-300','301-500','501-800','801-1000','1000+']">{{salePrice}}</ng-option>
+                    <ng-option [value]="salePrice" *ngFor="let salePrice of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">{{salePrice}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Rent Yield" name="searchRentYield" [(ngModel)]="searchForm.rentYield">
+                    <ng-option value="ALL">Rent Yield</ng-option>
+                    <ng-option [value]="rentYield" *ngFor="let rentYield of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">{{rentYield}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Weekly Current Rent" name="searchWeeklyCurrentRent" [(ngModel)]="searchForm.weeklyCurrentRent">
+                    <ng-option value="ALL">Weekly Current Rent</ng-option>
+                    <ng-option [value]="weeklyCurrentRent" *ngFor="let weeklyCurrentRent of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                      {{weeklyCurrentRent}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Weekly Rental Appraisal" name="searchWeeklyRentalAppraisal" [(ngModel)]="searchForm.weeeklyRentalAppraisal">
+                    <ng-option value="ALL">Weekly Rental Appraisal</ng-option>
+                    <ng-option [value]="weeeklyRentalAppraisal" *ngFor="let weeeklyRentalAppraisal of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                      {{weeeklyRentalAppraisal}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Property Value Growth (%)" name="searchPropertyValueGrowth" [(ngModel)]="searchForm.propertyValueGrowth">
+                    <ng-option value="ALL">Property Value Growth (%)</ng-option>
+                    <ng-option [value]="propertyValueGrowth" *ngFor="let propertyValueGrowth of ['0-20','21-40','41-60','61-80','81-100']">
+                      {{propertyValueGrowth}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Rental Market Price" name="searchRentalMarketPrice" [(ngModel)]="searchForm.rentalMarketPrice">
+                    <ng-option value="ALL">Rental Market Price</ng-option>
+                    <ng-option [value]="rentalMarketPrice" *ngFor="let rentalMarketPrice of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                      {{rentalMarketPrice}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Vacancy Rate" name="searchVacancyRate" [(ngModel)]="searchForm.vacancyRate">
+                    <ng-option value="ALL">Vacancy Rate</ng-option>
+                    <ng-option [value]="vacancyRate" *ngFor="let vacancyRate of ['0-20','21-40','41-60','61-80','81-100']">
+                      {{vacancyRate}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Body Corporate Value" name="searchVacancyRate" [(ngModel)]="searchForm.bodyCorporateValue">
+                    <ng-option value="ALL">Body Corporate Value</ng-option>
+                    <ng-option [value]="bodyCorporateValue" *ngFor="let bodyCorporateValue of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                      {{bodyCorporateValue}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Parking Available?" name="searchParkingAvailable" [(ngModel)]="searchForm.parkingAvailable">
+                    <ng-option value="ALL">Parking Available?</ng-option>
+                    <ng-option value="YES">Yes</ng-option>
+                    <ng-option value="NO">No</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Currently Tenanted?" name="searchCurrentlyTenanted" [(ngModel)]="searchForm.currentlyTenanted">
+                    <ng-option value="ALL">Currently Tenanted?</ng-option>
+                    <ng-option value="YES">Yes</ng-option>
+                    <ng-option value="NO">No</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Flood Zone?" name="searchFloodZone" [(ngModel)]="searchForm.floodZone">
+                    <ng-option value="ALL">Flood Zone?</ng-option>
+                    <ng-option value="YES">Yes</ng-option>
+                    <ng-option value="NO">No</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Fire Zone?" name="searchFireZone" [(ngModel)]="searchForm.fireZone">
+                    <ng-option value="ALL">Fire Zone?</ng-option>
+                    <ng-option value="YES">Yes</ng-option>
+                    <ng-option value="NO">No</ng-option>
                   </ng-select>
                 </div>
               </div>
@@ -77,6 +205,15 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Land DA Approved?" name="searchLandApproved" [(ngModel)]="searchForm.landDAApproved">
                     <ng-option value="ALL">Land DA Approved?</ng-option>
+                    <ng-option value="YES">Yes</ng-option>
+                    <ng-option value="NO">No</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Is Body Corporate?" name="searchIsBodyCorporate" [(ngModel)]="searchForm.isBodyCorporate">
+                    <ng-option value="ALL">Is Body Corporate?</ng-option>
                     <ng-option value="YES">Yes</ng-option>
                     <ng-option value="NO">No</ng-option>
                   </ng-select>
@@ -234,13 +371,17 @@
                         <h3 class="item-title"><a routerLink="/properties/{{pData.id}}">{{pData.title}}</a></h3>
                       </div>
                       <div class="location-area"><i class="flaticon-maps-and-flags"></i>{{pData.areaName}}, {{pData.city}}</div>
-                      <div class="item-categoery3">
-                        <ul>
-                          <!-- <li><i class="flaticon-two-overlapping-square"></i>{{pData.propertyStatus}}</li> -->
-                          <!-- <li><i class="flaticon-shower"></i>Baths: 02</li>
-                          <li><i class="flaticon-two-overlapping-square"></i>931 Sqft</li> -->
-                        </ul>
+                      <div class="item-price">
+                        <ng-container *ngIf="pData.hideSalePrice">For Price: Contact Agent</ng-container>
+                        <ng-container *ngIf="!pData.hideSalePrice">${{pData.salePrice | number: '1.2-2'}}</ng-container>
                       </div>
+                      <!-- <div class="item-categoery3">
+                        <ul>
+                          <li><i class="flaticon-two-overlapping-square"></i>{{pData.propertyStatus}}</li>
+                          <li><i class="flaticon-shower"></i>Baths: 02</li>
+                          <li><i class="flaticon-two-overlapping-square"></i>931 Sqft</li>
+                        </ul>
+                      </div> -->
                     </div>
                   </div>
                 </div>

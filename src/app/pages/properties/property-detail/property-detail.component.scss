@@ -20,3 +20,9 @@
     page-break-inside: avoid !important;
   }
 }
+.item-phn {
+  a {
+    color: var(--rt-primary-color);
+    font-weight: 600;
+  }
+}
