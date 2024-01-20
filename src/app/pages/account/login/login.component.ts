@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as CONSTANTS from 'src/app/core/constants';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@services/auth/auth.service';
+import { Subscription } from 'rxjs/index';
 
 @Component({
   selector: 'app-login',
@@ -16,15 +17,29 @@ export class LoginComponent implements OnInit {
   submitLoading: boolean;
   errors: any = {};
   ERROR_MESSAGES = CONSTANTS.ERROR_MESSAGES;
+  routeSubscription$: Subscription;
+  redirectLink = null;
   constructor(
     private router: Router,
+    private activateRoute: ActivatedRoute,
     // private userService: UserService,
     private authService: AuthService,
     private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
+    this.routeSubscription$ = this.activateRoute.queryParams.subscribe((query: any) => {
+      this.redirectLink = null;
+      if (query.q) {
+        this.redirectLink = query.q;
+      }
+    });
     this.loginForm = this.initialFormValues();
+  }
+  ngOnDestroy() {
+    if (this.routeSubscription$) {
+      this.routeSubscription$.unsubscribe();
+    }
   }
   initialFormValues() {
     return {
@@ -76,10 +91,14 @@ export class LoginComponent implements OnInit {
           }, loginRes.tokens?.access, loginRes.tokens?.refresh);
           this.messageService.add({ severity: 'success', summary: 'Success', detail: `Welcome Back! ${fullName}` });
           setTimeout(() => {
-            this.router.navigateByUrl(`/profile/my-properties`);
+            if (this.redirectLink) {
+              this.router.navigateByUrl(atob(this.redirectLink));
+            } else {
+              this.router.navigateByUrl(`/profile/my-properties`);
+            }
             this.resetLoginForm();
             this.submitLoading = false;
-          }, 1000);
+          }, 500);
         },
         (loginError) => {
           console.log('loginError', loginError);

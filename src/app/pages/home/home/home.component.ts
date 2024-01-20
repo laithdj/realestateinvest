@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PropertyService } from '@pages/profile/services/property/property.service';
+import { AuthService } from '@services/auth/auth.service';
 
 declare var $: any;
 declare var TweenMax: any;
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private propertyService: PropertyService,
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -245,7 +247,12 @@ export class HomeComponent implements OnInit {
       filterURL += `?${filters.join('&')}`;
     }
     console.log('filterURL', filterURL);
-    this.router.navigateByUrl(filterURL);
+    const userLoggedIn = this.authService.isLoggedIn();
+    if (userLoggedIn) {
+      this.router.navigateByUrl(filterURL);
+      return;
+    }
+    this.router.navigateByUrl(`/account/login?q=${btoa(filterURL)}`);
   }
   openMoreFilter() {
     this.showMoreFilter = !this.showMoreFilter;
