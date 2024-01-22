@@ -1,7 +1,7 @@
 <!--=====================================-->
 <!--=   Breadcrumb     Start            =-->
 <!--=====================================-->
-
+<p-toast></p-toast>
 <div class="breadcrumb-wrap no-print">
   <div class="container">
     <nav aria-label="breadcrumb">
@@ -325,19 +325,25 @@
             <div class="widget widget-contact-box">
               <h3 class="widget-subtitle">Contact</h3>
               <div class="media d-flex">
-                <!-- <div class="flex-shrink-0">
-                  <div class="item-logo">
-                    <img src="/assets/img/theme2.png" alt="logo" width="100" height="100" />
-                  </div>
-                </div> -->
                 <div class="media-body flex-grow-1">
-                  <h4 class="item-title">{{details.sellerName}}</h4>
-                  <div class="item-phn">
-                    <ng-container *ngIf="isLoggedIn">{{details.sellerNumber}}</ng-container>
-                    <ng-container *ngIf="!isLoggedIn">04XX XXX XXX (<a routerLink="/account/login">Login</a> to view)</ng-container>
-                  </div>
-                  <div class="item-mail">{{details.sellerEmail}}</div>
-                  <div class="item-mail"><b>Address:</b> <br/>{{details.sellerAddress}}</div>
+                  <ng-container *ngIf="isShowContactAgent && !isLoadingContactAgent; else noShowContactAgent">
+                    <h4 class="item-title">{{details.sellerName}}</h4>
+                    <div class="item-phn">{{details.sellerNumber}}</div>
+                    <div class="item-mail">{{details.sellerEmail}}</div>
+                    <div class="item-mail"><b>Address:</b> <br/>{{details.sellerAddress}}</div>
+                  </ng-container>
+                  <ng-template #noShowContactAgent>
+                    <ng-container *ngIf="isLoadingContactAgent">
+                      <div class="extra-item">
+                        <i class="fa fa-spin fa-spinner"></i>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="!isLoadingContactAgent">
+                      <div class="extra-item">
+                        <a href="javascript:;" (click)="onShowContactAgent()">Click for Contact Details</a>
+                      </div>
+                    </ng-container>
+                  </ng-template>
                 </div>
               </div>
             </div>

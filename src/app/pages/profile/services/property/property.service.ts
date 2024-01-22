@@ -139,4 +139,7 @@ export class PropertyService {
   getProperties(filters: any): any {
     return this.http.post(`${baseurl}/property/properties`, filters);
   }
+  showPropertyAgent(propertyId: string): any {
+    return this.http.post(`${baseurl}/property/show-property-agent`, { propertyId });
+  }
 }

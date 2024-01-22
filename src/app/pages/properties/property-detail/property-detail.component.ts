@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import * as CONSTANTS from 'src/app/core/constants';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { PropertyService } from '@pages/profile/services/property/property.service';
 import { backendurl } from 'src/environments/environment';
 import * as moment from 'moment';
 import { AuthService } from '@services/auth/auth.service';
+import { MessageService } from 'primeng/api';
 
 declare var $: any;
 declare var Swiper: any;
@@ -23,10 +25,14 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
   swiperSliderMain = null;
   swiperSliderThumb = null;
   isLoggedIn = false;
+  isShowContactAgent = false;
+  isLoadingContactAgent = false;
+  ERROR_MESSAGES = CONSTANTS.ERROR_MESSAGES;
   constructor(
     private propertyService: PropertyService,
     private activateRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -100,6 +106,8 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
   }
   getPropertyDetail(propertyId: string) {
     this.details = {};
+    this.isShowContactAgent = false;
+    this.isLoadingContactAgent = false;
     this.propertyService.getPropertiesById(propertyId).subscribe(
       (propRes) => {
         console.log('propRes', propRes);
@@ -126,7 +134,7 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
       return `${months} months old`;
     }
     const days = moment().diff(createdDate, 'days');
-    if (days > 0) {
+    if (days >= 0) {
       return `${days} days old`;
     }
     return ``;
@@ -208,4 +216,30 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
 
   }
 
+  onShowContactAgent(): void {
+    console.log('onShowContactAgent called.', location.host);
+    // return;
+    this.isLoadingContactAgent = true;
+    this.propertyService.showPropertyAgent(this.id).subscribe(
+      (resDataShowAgent: any) => {
+        console.log('resDataShowAgent', resDataShowAgent);
+        setTimeout(() => {
+          this.isShowContactAgent = resDataShowAgent?.showData;
+          this.isLoadingContactAgent = false;
+        }, 500);
+      },
+      (resErrorShowAgent: any) => {
+        console.log('resErrorShowAgent', resErrorShowAgent);
+        if (resErrorShowAgent.error?.message) {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: resErrorShowAgent.error?.message });
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.ERROR_MESSAGES.SOMETHING_WRONG });
+        }
+        setTimeout(() => {
+          this.isShowContactAgent = false;
+          this.isLoadingContactAgent = false;
+        }, 500);
+      }
+    )
+  }
 }
