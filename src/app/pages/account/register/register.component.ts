@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as CONSTANTS from 'src/app/core/constants';
 import { UserService } from '../services/user.service';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/index';
 
 @Component({
   selector: 'app-register',
@@ -16,14 +17,28 @@ export class RegisterComponent implements OnInit {
   submitLoading: boolean;
   errors: any = {};
   ERROR_MESSAGES = CONSTANTS.ERROR_MESSAGES;
+  routeSubscription$: Subscription;
+  redirectLink = null;
   constructor(
     private router: Router,
+    private activateRoute: ActivatedRoute,
     private userService: UserService,
     private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
+    this.routeSubscription$ = this.activateRoute.queryParams.subscribe((query: any) => {
+      this.redirectLink = null;
+      if (query.q) {
+        this.redirectLink = query.q;
+      }
+    });
     this.registerForm = this.initialFormValues();
+  }
+  ngOnDestroy() {
+    if (this.routeSubscription$) {
+      this.routeSubscription$.unsubscribe();
+    }
   }
   initialFormValues() {
     return {
@@ -72,10 +87,14 @@ export class RegisterComponent implements OnInit {
         (userRes) => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Account created successfully.' });
           setTimeout(() => {
-            this.router.navigateByUrl(`/account/login`);
+            if (this.redirectLink) {
+              this.router.navigateByUrl(`/account/login?q=${this.redirectLink}`);
+            } else {
+              this.router.navigateByUrl(`/account/login`);
+            }
             this.resetRegisterForm();
             this.submitLoading = false;
-          }, 1000);
+          }, 500);
         },
         (userError) => {
           if (userError.error?.message) {

@@ -4212,7 +4212,7 @@ body.slidemenuon .sidebarBtn .bar:nth-child(4) {
 }
 .widget.widget-listing-box1 .widget-listing .item-content .item-price {
   color: var(--rt-primary-color);
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Ubuntu", sans-serif;
   font-weight: 600;
 }
@@ -12731,7 +12731,7 @@ body.slidemenuon .sidebarBtn .bar:nth-child(4) {
 }
 .property-box4 .item-content-property .item-price {
   color: var(--rt-primary-color);
-  font-size: 24px;
+  font-size: 20px;
   font-family: "Ubuntu", sans-serif;
   font-weight: 600;
 }

@@ -20,3 +20,22 @@
     page-break-inside: avoid !important;
   }
 }
+.item-phn {
+  a {
+    color: var(--rt-primary-color);
+    font-weight: 600;
+  }
+}
+.extra-item {
+  a {
+    color: var(--rt-primary-dark);
+    font-weight: 600;
+    &:hover {
+      color: var(--rt-primary-color);
+    }
+  }
+  i {
+    color: var(--rt-primary-dark);
+    font-size: 25px;
+  }
+}

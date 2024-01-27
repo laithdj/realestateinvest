@@ -8,6 +8,8 @@ import { PropertyDetailComponent } from './property-detail/property-detail.compo
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     RouterModule,
     FormsModule,
     NgSelectModule,
-    PropertiesRoutingModule
-  ]
+    ToastModule,
+    PropertiesRoutingModule,
+  ],
+  providers: [MessageService]
 })
 export class PropertiesModule { }

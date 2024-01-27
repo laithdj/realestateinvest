@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PropertyService } from '@pages/profile/services/property/property.service';
+import { AuthService } from '@services/auth/auth.service';
 
 declare var $: any;
 declare var TweenMax: any;
@@ -23,8 +24,23 @@ export class HomeComponent implements OnInit {
     category: null,
     bedrooms: null,
     bathrooms: null,
+    propertyAge: null,
+    landSize: null,
+    areaSize: null,
     salePrice: null,
+    rentYield: null,
+    weeklyCurrentRent: null,
+    weeeklyRentalAppraisal: null,
+    propertyValueGrowth: null,
+    rentalMarketPrice: null,
+    vacancyRate: null,
+    bodyCorporateValue: null,
+    parkingAvailable: null,
+    currentlyTenanted: null,
+    floodZone: null,
+    fireZone: null,
     landDAApproved: null,
+    isBodyCorporate: null,
     amenities: []
   };
   showMoreFilter = false;
@@ -32,6 +48,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private propertyService: PropertyService,
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -178,14 +195,64 @@ export class HomeComponent implements OnInit {
     if (this.homeSearchForm.bathrooms) {
       filters.push(`bathrooms=${encodeURIComponent(this.homeSearchForm.bathrooms)}`);
     }
+    if (this.homeSearchForm.propertyAge) {
+      filters.push(`propertyAge=${encodeURIComponent(this.homeSearchForm.propertyAge)}`);
+    }
+    if (this.homeSearchForm.landSize) {
+      filters.push(`landSize=${encodeURIComponent(this.homeSearchForm.landSize)}`);
+    }
+    if (this.homeSearchForm.areaSize) {
+      filters.push(`areaSize=${encodeURIComponent(this.homeSearchForm.areaSize)}`);
+    }
+    if (this.homeSearchForm.rentYield) {
+      filters.push(`rentYield=${encodeURIComponent(this.homeSearchForm.rentYield)}`);
+    }
+    if (this.homeSearchForm.weeklyCurrentRent) {
+      filters.push(`weeklyCurrentRent=${encodeURIComponent(this.homeSearchForm.weeklyCurrentRent)}`);
+    }
+    if (this.homeSearchForm.weeeklyRentalAppraisal) {
+      filters.push(`weeeklyRentalAppraisal=${encodeURIComponent(this.homeSearchForm.weeeklyRentalAppraisal)}`);
+    }
     if (this.homeSearchForm.salePrice) {
       filters.push(`salePrice=${encodeURIComponent(this.homeSearchForm.salePrice)}`);
+    }
+    if (this.homeSearchForm.propertyValueGrowth) {
+      filters.push(`propertyValueGrowth=${encodeURIComponent(this.homeSearchForm.propertyValueGrowth)}`);
+    }
+    if (this.homeSearchForm.rentalMarketPrice) {
+      filters.push(`rentalMarketPrice=${encodeURIComponent(this.homeSearchForm.rentalMarketPrice)}`);
+    }
+    if (this.homeSearchForm.vacancyRate) {
+      filters.push(`vacancyRate=${encodeURIComponent(this.homeSearchForm.vacancyRate)}`);
+    }
+    if (this.homeSearchForm.bodyCorporateValue) {
+      filters.push(`bodyCorporateValue=${encodeURIComponent(this.homeSearchForm.bodyCorporateValue)}`);
+    }
+    if (this.homeSearchForm.parkingAvailable) {
+      filters.push(`parkingAvailable=${encodeURIComponent(this.homeSearchForm.parkingAvailable)}`);
+    }
+    if (this.homeSearchForm.currentlyTenanted) {
+      filters.push(`currentlyTenanted=${encodeURIComponent(this.homeSearchForm.currentlyTenanted)}`);
+    }
+    if (this.homeSearchForm.floodZone) {
+      filters.push(`floodZone=${encodeURIComponent(this.homeSearchForm.floodZone)}`);
+    }
+    if (this.homeSearchForm.fireZone) {
+      filters.push(`fireZone=${encodeURIComponent(this.homeSearchForm.fireZone)}`);
+    }
+    if (this.homeSearchForm.isBodyCorporate) {
+      filters.push(`isBodyCorporate=${encodeURIComponent(this.homeSearchForm.isBodyCorporate)}`);
     }
     if (filters.length) {
       filterURL += `?${filters.join('&')}`;
     }
     console.log('filterURL', filterURL);
-    this.router.navigateByUrl(filterURL);
+    const userLoggedIn = this.authService.isLoggedIn();
+    if (userLoggedIn) {
+      this.router.navigateByUrl(filterURL);
+      return;
+    }
+    this.router.navigateByUrl(`/account/login?q=${btoa(filterURL)}`);
   }
   openMoreFilter() {
     this.showMoreFilter = !this.showMoreFilter;
@@ -201,8 +268,23 @@ export class HomeComponent implements OnInit {
       category: null,
       bedrooms: null,
       bathrooms: null,
+      propertyAge: null,
+      landSize: null,
+      areaSize: null,
       salePrice: null,
+      rentYield: null,
+      weeklyCurrentRent: null,
+      weeeklyRentalAppraisal: null,
+      propertyValueGrowth: null,
+      rentalMarketPrice: null,
+      vacancyRate: null,
+      bodyCorporateValue: null,
+      parkingAvailable: null,
+      currentlyTenanted: null,
+      floodZone: null,
+      fireZone: null,
       landDAApproved: null,
+      isBodyCorporate: null,
       amenities: []
     };
     if (this.amenitiesList?.length) {

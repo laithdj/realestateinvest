@@ -5,7 +5,7 @@
         <label class="control-label">
           How many Bedrooms? <strong class="rtcl-required">*</strong>
         </label>
-        <input type="text" name="bedrooms" class="form-control" [(ngModel)]="propertyForm.bedrooms" />
+        <input type="number" name="bedrooms" class="form-control" [(ngModel)]="propertyForm.bedrooms" />
         <div class="error" *ngIf="submitted && !propertyForm.bedrooms">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
       </div>
     </div>
@@ -14,7 +14,7 @@
         <label class="control-label">
           How many Bathrooms? <strong class="rtcl-required">*</strong>
         </label>
-        <input type="text" name="bathrooms" class="form-control" [(ngModel)]="propertyForm.bathrooms" />
+        <input type="number" name="bathrooms" class="form-control" [(ngModel)]="propertyForm.bathrooms" />
         <div class="error" *ngIf="submitted && !propertyForm.bathrooms">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
       </div>
     </div>
@@ -23,16 +23,16 @@
         <label class="control-label">
           Property Age <strong class="rtcl-required">*</strong>
         </label>
-        <input type="text" name="propertyAge" class="form-control" [(ngModel)]="propertyForm.propertyAge" />
+        <input type="number" name="propertyAge" class="form-control" [(ngModel)]="propertyForm.propertyAge" />
         <div class="error" *ngIf="submitted && !propertyForm.propertyAge">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
       </div>
     </div>
     <div class="col-3">
       <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.landSize}">
         <label class="control-label">
-          Land Size (in sqft.) <strong class="rtcl-required">*</strong>
+          Land Size (in sqmtr.) <strong class="rtcl-required">*</strong>
         </label>
-        <input type="text" name="landSize" class="form-control" [(ngModel)]="propertyForm.landSize"
+        <input type="number" name="landSize" class="form-control" [(ngModel)]="propertyForm.landSize"
           autocomplete="off" />
         <div class="error" *ngIf="submitted && !propertyForm.landSize">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
       </div>
@@ -40,9 +40,9 @@
     <div class="col-3">
       <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.area}">
         <label class="control-label">
-          Area (in sqft.) <strong class="rtcl-required">*</strong>
+          Area (in sqmtr.) <strong class="rtcl-required">*</strong>
         </label>
-        <input type="text" name="area" class="form-control" [(ngModel)]="propertyForm.area" autocomplete="off" />
+        <input type="number" name="area" class="form-control" [(ngModel)]="propertyForm.area" autocomplete="off" />
         <div class="error" *ngIf="submitted && !propertyForm.area">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
       </div>
     </div>
@@ -53,7 +53,7 @@
         <label class="control-label">
           Sale Price <strong class="rtcl-required">*</strong>
         </label>
-        <input type="text" name="salePrice" class="form-control" [(ngModel)]="propertyForm.salePrice" />
+        <input type="number" name="salePrice" class="form-control" [(ngModel)]="propertyForm.salePrice" />
         <div class="error" *ngIf="submitted && !propertyForm.salePrice">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
       </div>
     </div>
@@ -62,7 +62,7 @@
         <label class="control-label">
           Rent Yeild
         </label>
-        <input type="text" name="rentYield" class="form-control" [(ngModel)]="propertyForm.rentYield" />
+        <input type="number" name="rentYield" class="form-control" [(ngModel)]="propertyForm.rentYield" />
       </div>
     </div>
     <div class="col-3">
@@ -70,7 +70,7 @@
         <label class="control-label">
           Weekly Current Rent
         </label>
-        <input type="text" name="weeklyCurrentRent" class="form-control" [(ngModel)]="propertyForm.weeklyCurrentRent" />
+        <input type="number" name="weeklyCurrentRent" class="form-control" [(ngModel)]="propertyForm.weeklyCurrentRent" />
       </div>
     </div>
     <div class="col-3">
@@ -78,7 +78,7 @@
         <label class="control-label">
           Weekly Rental Appraisal
         </label>
-        <input type="text" name="weeeklyRentalAppraisal" class="form-control"
+        <input type="number" name="weeeklyRentalAppraisal" class="form-control"
           [(ngModel)]="propertyForm.weeeklyRentalAppraisal" />
       </div>
     </div>
@@ -89,7 +89,7 @@
         <label class="control-label">
           Property Value Growth (%) <strong class="rtcl-required">*</strong>
         </label>
-        <input type="text" name="propertyValueGrowth" class="form-control"
+        <input type="number" name="propertyValueGrowth" class="form-control"
           [(ngModel)]="propertyForm.propertyValueGrowth" />
         <div class="error" *ngIf="submitted && !propertyForm.propertyValueGrowth">{{ERROR_MESSAGES.FIELD_REQUIRED}}
         </div>
@@ -100,7 +100,7 @@
         <label class="control-label">
           Rental Market Price
         </label>
-        <input type="text" name="rentalMarketPrice" class="form-control" [(ngModel)]="propertyForm.rentalMarketPrice" />
+        <input type="number" name="rentalMarketPrice" class="form-control" [(ngModel)]="propertyForm.rentalMarketPrice" />
       </div>
     </div>
     <div class="col-4">
@@ -108,7 +108,7 @@
         <label class="control-label">
           Vacancy Rate
         </label>
-        <input type="text" name="vacancyRate" class="form-control" [(ngModel)]="propertyForm.vacancyRate" />
+        <input type="number" name="vacancyRate" class="form-control" [(ngModel)]="propertyForm.vacancyRate" />
       </div>
     </div>
   </div>
@@ -167,7 +167,7 @@
         <label class="control-label">
           Body Corporate Value
         </label>
-        <input type="text" name="bodyCorporateValue" class="form-control"
+        <input type="number" name="bodyCorporateValue" class="form-control"
           [(ngModel)]="propertyForm.bodyCorporateValue" />
       </div>
     </div>
