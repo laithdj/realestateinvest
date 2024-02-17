@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col-xl-12">
         <div class="main-banner-box1">
-          <h1 class="item-title wow fadeInUp" data-wow-delay=".4s">Find the perfect place to invest</h1>
+          <h1 class="item-title wow fadeInUp" data-wow-delay=".4s">Find the perfect place in dubai to invest</h1>
 
           <div class="banner-search-wrap">
             <div class="rld-main-search">
@@ -22,17 +22,21 @@
                   <div class="box">
                     <div class="box-top">
                       <div class="rld-single-input item">
-                        <input type="text" name="searchTitle" [(ngModel)]="homeSearchForm.title" placeholder="Enter Keyword here...">
+                        <input type="text" name="searchTitle" [(ngModel)]="homeSearchForm.title"
+                          placeholder="Enter Keyword here...">
                       </div>
                       <div class="rld-single-select item ml-22">
-                        <ng-select name="searchType" [searchable]="false" [(ngModel)]="homeSearchForm.type" placeholder="Property Type">
+                        <ng-select name="searchType" [searchable]="false" [(ngModel)]="homeSearchForm.typeId"
+                          placeholder="Property Type">
                           <ng-option [value]="typeValue.id" *ngFor="let typeValue of propertyTypes">
                             {{typeValue.type}}
                           </ng-option>
                         </ng-select>
                       </div>
                       <div class="rld-single-select item">
-                        <ng-select name="searchCity" [searchable]="false" [searchable]="true" [(ngModel)]="homeSearchForm.city" placeholder="All Cities" class="city-search-home">
+                        <ng-select name="searchCity" [searchable]="false" [searchable]="true"
+                          [(ngModel)]="homeSearchForm.cityId" placeholder="All Cities" class="city-search-home">
+                          <ng-option value="">All Cities</ng-option>
                           <ng-option [value]="cityValue.id" *ngFor="let cityValue of cityList">
                             {{cityValue.name}}
                           </ng-option>
@@ -45,7 +49,8 @@
                           </span>
                         </div>
                         <div class="filter-button-area">
-                          <a class="filter-btn" href="javascript:;" (click)="onSearchHome()"><span>Search</span><i class="fas fa-search"></i></a>
+                          <a class="filter-btn" href="javascript:;" (click)="onSearchHome()"><span>Search</span><i
+                              class="fas fa-search"></i></a>
                         </div>
                       </div>
                     </div>
@@ -54,7 +59,8 @@
                         <div class="col-lg-2 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
                             <label class="item-bath">Bedrooms</label>
-                            <ng-select name="searchBedrooms" [searchable]="false" [(ngModel)]="homeSearchForm.bedrooms" placeholder="Any">
+                            <ng-select name="searchBedrooms" [searchable]="false" [(ngModel)]="homeSearchForm.bedrooms"
+                              placeholder="Any">
                               <ng-option [value]="bed" *ngFor="let bed of ['1','2','3','4','4+']">
                                 {{bed}}
                               </ng-option>
@@ -64,7 +70,8 @@
                         <div class="col-lg-2 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
                             <label class="item-bath">Bathrooms</label>
-                            <ng-select name="searchBathrooms" [searchable]="false" [(ngModel)]="homeSearchForm.bathrooms" placeholder="Any">
+                            <ng-select name="searchBathrooms" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.bathrooms" placeholder="Any">
                               <ng-option [value]="bath" *ngFor="let bath of ['1','2','3','4','4+']">
                                 {{bath}}
                               </ng-option>
@@ -74,7 +81,8 @@
                         <div class="col-lg-2 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
                             <label class="item-bath">Property Age (yrs)</label>
-                            <ng-select name="searchPropertyAge" [searchable]="false" [(ngModel)]="homeSearchForm.propertyAge" placeholder="Any">
+                            <ng-select name="searchPropertyAge" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.propertyAge" placeholder="Any">
                               <ng-option [value]="propAge" *ngFor="let propAge of ['0-5','6-10','10-15','16-20','20+']">
                                 {{propAge}}
                               </ng-option>
@@ -84,8 +92,10 @@
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
                             <label class="item-bath">Land Size (in sqmtr.)</label>
-                            <ng-select name="searchLandSize" [searchable]="false" [(ngModel)]="homeSearchForm.landSize" placeholder="Any">
-                              <ng-option [value]="landSize" *ngFor="let landSize of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                            <ng-select name="searchLandSize" [searchable]="false" [(ngModel)]="homeSearchForm.landSize"
+                              placeholder="Any">
+                              <ng-option [value]="landSize"
+                                *ngFor="let landSize of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
                                 {{landSize}}
                               </ng-option>
                             </ng-select>
@@ -94,8 +104,10 @@
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
                             <label class="item-bath">Area (in sqmtr.)</label>
-                            <ng-select name="searchAreaSize" [searchable]="false" [(ngModel)]="homeSearchForm.areaSize" placeholder="Any">
-                              <ng-option [value]="areaSize" *ngFor="let areaSize of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                            <ng-select name="searchAreaSize" [searchable]="false" [(ngModel)]="homeSearchForm.areaSize"
+                              placeholder="Any">
+                              <ng-option [value]="areaSize"
+                                *ngFor="let areaSize of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
                                 {{areaSize}}
                               </ng-option>
                             </ng-select>
@@ -104,8 +116,10 @@
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
                             <label class="item-bath">Sale Price</label>
-                            <ng-select name="searchSalePrice" [searchable]="false" [(ngModel)]="homeSearchForm.salePrice" placeholder="Any">
-                              <ng-option [value]="salePrice" *ngFor="let salePrice of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                            <ng-select name="searchSalePrice" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.salePrice" placeholder="Any">
+                              <ng-option [value]="salePrice"
+                                *ngFor="let salePrice of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
                                 {{salePrice}}
                               </ng-option>
                             </ng-select>
@@ -113,9 +127,11 @@
                         </div>
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                           <div class="form-group bath">
-                            <label class="item-bath">Rent Yield</label>
-                            <ng-select name="searchRentYield" [searchable]="false" [(ngModel)]="homeSearchForm.rentYield" placeholder="Any">
-                              <ng-option [value]="rentYield" *ngFor="let rentYield of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                            <label class="item-bath">Rent Yield (%)</label>
+                            <ng-select name="searchRentYield" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.rentYield" placeholder="Any">
+                              <ng-option [value]="rentYield"
+                                *ngFor="let rentYield of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
                                 {{rentYield}}
                               </ng-option>
                             </ng-select>
@@ -124,8 +140,10 @@
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                           <div class="form-group bath">
                             <label class="item-bath">Weekly Current Rent</label>
-                            <ng-select name="searchWeeklyCurrentRent" [searchable]="false" [(ngModel)]="homeSearchForm.weeklyCurrentRent" placeholder="Any">
-                              <ng-option [value]="weeklyCurrentRent" *ngFor="let weeklyCurrentRent of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                            <ng-select name="searchWeeklyCurrentRent" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.weeklyCurrentRent" placeholder="Any">
+                              <ng-option [value]="weeklyCurrentRent"
+                                *ngFor="let weeklyCurrentRent of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
                                 {{weeklyCurrentRent}}
                               </ng-option>
                             </ng-select>
@@ -134,8 +152,10 @@
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                           <div class="form-group bath">
                             <label class="item-bath">Weekly Rental Appraisal</label>
-                            <ng-select name="searchWeeklyRentalAppraisal" [searchable]="false" [(ngModel)]="homeSearchForm.weeeklyRentalAppraisal" placeholder="Any">
-                              <ng-option [value]="weeeklyRentalAppraisal" *ngFor="let weeeklyRentalAppraisal of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                            <ng-select name="searchWeeklyRentalAppraisal" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.weeeklyRentalAppraisal" placeholder="Any">
+                              <ng-option [value]="weeeklyRentalAppraisal"
+                                *ngFor="let weeeklyRentalAppraisal of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
                                 {{weeeklyRentalAppraisal}}
                               </ng-option>
                             </ng-select>
@@ -144,8 +164,10 @@
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                           <div class="form-group bath">
                             <label class="item-bath">Property Value Growth (%)</label>
-                            <ng-select name="searchPropertyValueGrowth" [searchable]="false" [(ngModel)]="homeSearchForm.propertyValueGrowth" placeholder="Any">
-                              <ng-option [value]="propertyValueGrowth" *ngFor="let propertyValueGrowth of ['0-20','21-40','41-60','61-80','81-100']">
+                            <ng-select name="searchPropertyValueGrowth" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.propertyValueGrowth" placeholder="Any">
+                              <ng-option [value]="propertyValueGrowth"
+                                *ngFor="let propertyValueGrowth of ['0-20','21-40','41-60','61-80','81-100']">
                                 {{propertyValueGrowth}}
                               </ng-option>
                             </ng-select>
@@ -154,8 +176,10 @@
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                           <div class="form-group bath">
                             <label class="item-bath">Rental Market Price</label>
-                            <ng-select name="searchRentalMarketPrice" [searchable]="false" [(ngModel)]="homeSearchForm.rentalMarketPrice" placeholder="Any">
-                              <ng-option [value]="rentalMarketPrice" *ngFor="let rentalMarketPrice of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                            <ng-select name="searchRentalMarketPrice" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.rentalMarketPrice" placeholder="Any">
+                              <ng-option [value]="rentalMarketPrice"
+                                *ngFor="let rentalMarketPrice of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
                                 {{rentalMarketPrice}}
                               </ng-option>
                             </ng-select>
@@ -163,9 +187,11 @@
                         </div>
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                           <div class="form-group bath">
-                            <label class="item-bath">Vacancy Rate</label>
-                            <ng-select name="searchVacancyRate" [searchable]="false" [(ngModel)]="homeSearchForm.vacancyRate" placeholder="Any">
-                              <ng-option [value]="vacancyRate" *ngFor="let vacancyRate of ['0-20','21-40','41-60','61-80','81-100']">
+                            <label class="item-bath">Vacancy Rate (%)</label>
+                            <ng-select name="searchVacancyRate" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.vacancyRate" placeholder="Any">
+                              <ng-option [value]="vacancyRate"
+                                *ngFor="let vacancyRate of ['0-20','21-40','41-60','61-80','81-100']">
                                 {{vacancyRate}}
                               </ng-option>
                             </ng-select>
@@ -174,8 +200,10 @@
                         <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                           <div class="form-group bath">
                             <label class="item-bath">Body Corporate Value</label>
-                            <ng-select name="searchBodyCorporateValue" [searchable]="false" [(ngModel)]="homeSearchForm.bodyCorporateValue" placeholder="Any">
-                              <ng-option [value]="bodyCorporateValue" *ngFor="let bodyCorporateValue of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                            <ng-select name="searchBodyCorporateValue" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.bodyCorporateValue" placeholder="Any">
+                              <ng-option [value]="bodyCorporateValue"
+                                *ngFor="let bodyCorporateValue of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
                                 {{bodyCorporateValue}}
                               </ng-option>
                             </ng-select>
@@ -184,7 +212,8 @@
                         <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
                           <div class="form-group garage">
                             <label class="item-garage">Parking Available?</label>
-                            <ng-select name="searchParkingAvailable" [searchable]="false" [(ngModel)]="homeSearchForm.parkingAvailable" placeholder="Any">
+                            <ng-select name="searchParkingAvailable" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.parkingAvailable" placeholder="Any">
                               <ng-option value="YES">Yes</ng-option>
                               <ng-option value="NO">No</ng-option>
                             </ng-select>
@@ -193,7 +222,8 @@
                         <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
                           <div class="form-group garage">
                             <label class="item-garage">Currently Tenanted?</label>
-                            <ng-select name="searchCurrentlyTenanted" [searchable]="false" [(ngModel)]="homeSearchForm.currentlyTenanted" placeholder="Any">
+                            <ng-select name="searchCurrentlyTenanted" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.currentlyTenanted" placeholder="Any">
                               <ng-option value="YES">Yes</ng-option>
                               <ng-option value="NO">No</ng-option>
                             </ng-select>
@@ -202,7 +232,8 @@
                         <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
                           <div class="form-group garage">
                             <label class="item-garage">Flood Zone?</label>
-                            <ng-select name="searchFloodZone" [searchable]="false" [(ngModel)]="homeSearchForm.floodZone" placeholder="Any">
+                            <ng-select name="searchFloodZone" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.floodZone" placeholder="Any">
                               <ng-option value="YES">Yes</ng-option>
                               <ng-option value="NO">No</ng-option>
                             </ng-select>
@@ -211,7 +242,8 @@
                         <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
                           <div class="form-group garage">
                             <label class="item-garage">Fire Zone?</label>
-                            <ng-select name="searchFireZone" [searchable]="false" [(ngModel)]="homeSearchForm.fireZone" placeholder="Any">
+                            <ng-select name="searchFireZone" [searchable]="false" [(ngModel)]="homeSearchForm.fireZone"
+                              placeholder="Any">
                               <ng-option value="YES">Yes</ng-option>
                               <ng-option value="NO">No</ng-option>
                             </ng-select>
@@ -220,7 +252,8 @@
                         <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
                           <div class="form-group garage">
                             <label class="item-garage">Land DA Approved?</label>
-                            <ng-select name="searchLandDAApproved" [searchable]="false" [(ngModel)]="homeSearchForm.landDAApproved" placeholder="Any">
+                            <ng-select name="searchLandDAApproved" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.landDAApproved" placeholder="Any">
                               <ng-option value="YES">Yes</ng-option>
                               <ng-option value="NO">No</ng-option>
                             </ng-select>
@@ -229,7 +262,8 @@
                         <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
                           <div class="form-group garage">
                             <label class="item-garage">Is Body Corporate?</label>
-                            <ng-select name="searchIsBodyCorporate" [searchable]="false" [(ngModel)]="homeSearchForm.isBodyCorporate" placeholder="Any">
+                            <ng-select name="searchIsBodyCorporate" [searchable]="false"
+                              [(ngModel)]="homeSearchForm.isBodyCorporate" placeholder="Any">
                               <ng-option value="YES">Yes</ng-option>
                               <ng-option value="NO">No</ng-option>
                             </ng-select>
@@ -241,7 +275,9 @@
                             <h4 class="text-dark">Amenities</h4>
                             <ul class="no-ul-list third-row">
                               <li *ngFor="let amenityValue of amenitiesList; let i = index">
-                                <input [id]="'a-'+ i" class="checkbox-custom" [name]="'a-'+ i" type="checkbox" [checked]="amenityValue.isChecked" [(ngModel)]="amenityValue.isChecked" (change)="onChangeSearchAmenity(amenityValue.isChecked, amenityValue.id)">
+                                <input [id]="'a-'+ i" class="checkbox-custom" [name]="'a-'+ i" type="checkbox"
+                                  [checked]="amenityValue.isChecked" [(ngModel)]="amenityValue.isChecked"
+                                  (change)="onChangeSearchAmenity(amenityValue.isChecked, amenityValue.id)">
                                 <label [for]="'a-'+ i" class="checkbox-custom-label">{{amenityValue.name}}</label>
                               </li>
                             </ul>

@@ -73,7 +73,7 @@ export class GeneralComponent implements OnInit {
   getCityList(): void {
     this.propertyService.getCities().subscribe(cityRes => {
       if (cityRes.length > 0) {
-        this.cityList = cityRes;
+        this.cityList = cityRes.filter((x) => x.cityType === 'ae');
       }
     })
   }

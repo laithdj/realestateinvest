@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
   amenitiesList = [];
   homeSearchForm = {
     title: '',
-    type: null,
-    city: null,
+    typeId: null,
+    cityId: null,
     category: null,
     bedrooms: null,
     bathrooms: null,
@@ -174,11 +174,11 @@ export class HomeComponent implements OnInit {
     if (this.homeSearchForm.title) {
       filters.push(`title=${encodeURIComponent(this.homeSearchForm.title)}`);
     }
-    if (this.homeSearchForm.type) {
-      filters.push(`type=${encodeURIComponent(this.homeSearchForm.type)}`);
+    if (this.homeSearchForm.typeId) {
+      filters.push(`typeId=${encodeURIComponent(this.homeSearchForm.typeId)}`);
     }
-    if (this.homeSearchForm.city) {
-      filters.push(`city=${encodeURIComponent(this.homeSearchForm.city)}`);
+    if (this.homeSearchForm.cityId) {
+      filters.push(`cityId=${encodeURIComponent(this.homeSearchForm.cityId)}`);
     }
     if (this.homeSearchForm.category) {
       filters.push(`category=${encodeURIComponent(this.homeSearchForm.category)}`);
@@ -263,8 +263,8 @@ export class HomeComponent implements OnInit {
   clearFilter() {
     this.homeSearchForm = {
       title: '',
-      type: null,
-      city: null,
+      typeId: null,
+      cityId: null,
       category: null,
       bedrooms: null,
       bathrooms: null,
