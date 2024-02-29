@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as CONSTANTS from 'src/app/core/constants';
-import { ActivatedRoute, Params, Route } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { PropertyService } from '@pages/profile/services/property/property.service';
 import { backendurl } from 'src/environments/environment';
 import * as moment from 'moment';
@@ -32,6 +32,7 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
     private propertyService: PropertyService,
     private activateRoute: ActivatedRoute,
     private authService: AuthService,
+    private router: Router,
     private messageService: MessageService
   ) { }
 
@@ -217,29 +218,38 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
   }
 
   onShowContactAgent(): void {
-    console.log('onShowContactAgent called.', location.host);
-    // return;
-    this.isLoadingContactAgent = true;
-    this.propertyService.showPropertyAgent(this.id).subscribe(
-      (resDataShowAgent: any) => {
-        console.log('resDataShowAgent', resDataShowAgent);
-        setTimeout(() => {
-          this.isShowContactAgent = resDataShowAgent?.showData;
-          this.isLoadingContactAgent = false;
-        }, 500);
-      },
-      (resErrorShowAgent: any) => {
-        console.log('resErrorShowAgent', resErrorShowAgent);
-        if (resErrorShowAgent.error?.message) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: resErrorShowAgent.error?.message });
-        } else {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.ERROR_MESSAGES.SOMETHING_WRONG });
+    const userLoggedIn = this.authService.isLoggedIn();
+    if (userLoggedIn) {
+      console.log('onShowContactAgent called.', location.host);
+      // return;
+      this.isLoadingContactAgent = true;
+      this.propertyService.showPropertyAgent(this.id).subscribe(
+        (resDataShowAgent: any) => {
+          console.log('resDataShowAgent', resDataShowAgent);
+          setTimeout(() => {
+            this.isShowContactAgent = resDataShowAgent?.showData;
+            this.isLoadingContactAgent = false;
+          }, 500);
+        },
+        (resErrorShowAgent: any) => {
+          console.log('resErrorShowAgent', resErrorShowAgent);
+          if (resErrorShowAgent.error?.message) {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: resErrorShowAgent.error?.message });
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: this.ERROR_MESSAGES.SOMETHING_WRONG });
+          }
+          setTimeout(() => {
+            this.isShowContactAgent = false;
+            this.isLoadingContactAgent = false;
+          }, 500);
         }
-        setTimeout(() => {
-          this.isShowContactAgent = false;
-          this.isLoadingContactAgent = false;
-        }, 500);
-      }
-    )
+      )
+    } else {
+      this.router.navigateByUrl(`/account/login`);
+
+    }
+
+
+
   }
 }
