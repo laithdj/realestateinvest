@@ -77,7 +77,7 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Land Size (in sqmtr.)" name="searchLandSize" [(ngModel)]="searchForm.landSize">
                     <ng-option value="ALL">Land Size (in sqmtr.)</ng-option>
-                    <ng-option [value]="landSize" *ngFor="let landSize of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">{{landSize}}</ng-option>
+                    <ng-option [value]="landSize" *ngFor="let landSize of ['0-400','401-800','801-900','15,001-20,000','20,000+']">{{landSize}}</ng-option>
                   </ng-select>
                 </div>
               </div>
@@ -85,7 +85,7 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Area (in sqmtr.)" name="searchAreaSize" [(ngModel)]="searchForm.areaSize">
                     <ng-option value="ALL">Area (in sqmtr.)</ng-option>
-                    <ng-option [value]="areaSize" *ngFor="let areaSize of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">{{areaSize}}</ng-option>
+                    <ng-option [value]="areaSize" *ngFor="let areaSize of ['0-400','401-800','801-900','15,001-20,000','20,000+']">{{areaSize}}</ng-option>
                   </ng-select>
                 </div>
               </div>
@@ -93,7 +93,7 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Sale Price" name="searchSalePrice" [(ngModel)]="searchForm.salePrice">
                     <ng-option value="ALL">Sale Price</ng-option>
-                    <ng-option [value]="salePrice" *ngFor="let salePrice of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">{{salePrice}}</ng-option>
+                    <ng-option [value]="salePrice" *ngFor="let salePrice of ['1000-100,000','100,000-500,000','500,000-1,000,000','1,000,000-5,000,000','5,000,000+']">{{salePrice}}</ng-option>
                   </ng-select>
                 </div>
               </div>
@@ -101,7 +101,7 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Rent Yield" name="searchRentYield" [(ngModel)]="searchForm.rentYield">
                     <ng-option value="ALL">Rent Yield</ng-option>
-                    <ng-option [value]="rentYield" *ngFor="let rentYield of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">{{rentYield}}</ng-option>
+                    <ng-option [value]="rentYield" *ngFor="let rentYield of ['0-1','1-2','2-3','3-4','5+']">{{rentYield}}</ng-option>
                   </ng-select>
                 </div>
               </div>
@@ -109,7 +109,7 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Weekly Current Rent" name="searchWeeklyCurrentRent" [(ngModel)]="searchForm.weeklyCurrentRent">
                     <ng-option value="ALL">Weekly Current Rent</ng-option>
-                    <ng-option [value]="weeklyCurrentRent" *ngFor="let weeklyCurrentRent of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                    <ng-option [value]="weeklyCurrentRent" *ngFor="let weeklyCurrentRent of ['0-100','100-500','500-1000','1000+']">
                       {{weeklyCurrentRent}}
                     </ng-option>
                   </ng-select>
@@ -119,7 +119,7 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Weekly Rental Appraisal" name="searchWeeklyRentalAppraisal" [(ngModel)]="searchForm.weeeklyRentalAppraisal">
                     <ng-option value="ALL">Weekly Rental Appraisal</ng-option>
-                    <ng-option [value]="weeeklyRentalAppraisal" *ngFor="let weeeklyRentalAppraisal of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                    <ng-option [value]="weeeklyRentalAppraisal" *ngFor="let weeeklyRentalAppraisal of ['0-100','100-500','500-1000','1000+']">
                       {{weeeklyRentalAppraisal}}
                     </ng-option>
                   </ng-select>
@@ -139,7 +139,7 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select Rental Market Price" name="searchRentalMarketPrice" [(ngModel)]="searchForm.rentalMarketPrice">
                     <ng-option value="ALL">Rental Market Price</ng-option>
-                    <ng-option [value]="rentalMarketPrice" *ngFor="let rentalMarketPrice of ['0-5,000','5,001-10,000','10,001-15,000','15,001-20,000','20,000+']">
+                    <ng-option [value]="rentalMarketPrice" *ngFor="let rentalMarketPrice of ['0-100','100-500','500-1000','1000+']">
                       {{rentalMarketPrice}}
                     </ng-option>
                   </ng-select>
